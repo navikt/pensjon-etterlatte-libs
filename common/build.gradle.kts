@@ -40,16 +40,13 @@ tasks {
     }
 }
 
-val githubUser: String? by project
-val githubPassword: String? by project
-
 publishing {
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/navikt/pensjon-etterlatte-libs")
             credentials {
-                username = githubUser
-                password = githubPassword
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
@@ -57,6 +54,9 @@ publishing {
         create<MavenPublication>("mavenJava") {
 
             pom {
+                groupId = "com.github.navikt.etterlatte.libs"
+                artifactId = "etterlatte-libs-common"
+
                 name.set("pensjon-etterlatte-libs")
                 url.set("https://github.com/navikt/pensjon-etterlatte-libs")
 
