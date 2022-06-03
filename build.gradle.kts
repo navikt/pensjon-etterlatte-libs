@@ -6,9 +6,6 @@ plugins {
     id("ca.cutterslade.analyze") version "1.8.1" apply true
 }
 
-group = "no.nav.etterlatte"
-//    version = blir håndtert av .github/workflows/release-*.yaml
-
 repositories {
     mavenCentral()
 }
@@ -29,6 +26,9 @@ tasks {
 }
 
 allprojects {
+    group = "no.nav.etterlatte"
+    // version = blir håndtert av .github/workflows/release-*.yaml
+
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {

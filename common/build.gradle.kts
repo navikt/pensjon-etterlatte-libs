@@ -15,10 +15,10 @@ dependencies {
     implementation("io.ktor:ktor-client-auth:1.6.1")
     implementation("io.ktor:ktor-client-jackson:1.6.1")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("io.kotest:kotest-assertions-core:5.3.0")
     testImplementation("io.mockk:mockk:1.12.0")
     testImplementation("io.ktor:ktor-client-mock:1.6.1")
 }
@@ -37,7 +37,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
 
             pom {
-                name.set("etterlatte-common")
+                name.set("common")
                 url.set("https://github.com/navikt/pensjon-etterlatte-libs")
 
                 licenses {
