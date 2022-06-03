@@ -46,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: no.nav.etterlatte:common-test:${{ env.RELEASE_TAG }}
-          release_name: no.nav.etterlatte:common-test:${{ env.RELEASE_TAG }}
+          tag_name: common-test/${{ env.RELEASE_TAG }}
+          release_name: common-test/${{ env.RELEASE_TAG }}
           body: |
             Changes in this release
             ${{ steps.changelog.outputs.CHANGELOG }}

@@ -1,10 +1,10 @@
-name: Release ktorclient-auth-clientcredentials
+name: Release ktor-client-auth
 
 on:
   workflow_dispatch: # Allow manually triggered workflow run
   push:
     paths:
-      - ktorclient-auth-clientcredentials
+      - ktor-client-auth
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
 
       # Build
       - name: Test and build
-        run: ./gradlew :ktorclient-auth-clientcredentials:test :ktorclient-auth-clientcredentials:build
+        run: ./gradlew :ktor-client-auth:test :ktor-client-auth:build
 
   release:
     name: Create Release
@@ -33,7 +33,7 @@ jobs:
           export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M).$(echo $GITHUB_SHA | cut -c 1-12)"
           echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
 #      - name: Build release
-#        run: ./gradlew :ktorclient-auth-clientcredentials:build -Pversion="${{ env.RELEASE_TAG }}"
+#        run: ./gradlew :ktor-client-auth:build -Pversion="${{ env.RELEASE_TAG }}"
       - name: Set changelog
         id: changelog
         # (Escape newlines see https://github.com/actions/create-release/issues/25)
@@ -46,14 +46,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: no.nav.etterlatte:ktorclient-auth-clientcredentials:${{ env.RELEASE_TAG }}
-          release_name: no.nav.etterlatte:ktorclient-auth-clientcredentials:${{ env.RELEASE_TAG }}
+          tag_name: ktor-client-auth/${{ env.RELEASE_TAG }}
+          release_name: ktor-client-auth/${{ env.RELEASE_TAG }}
           body: |
             Changes in this release
             ${{ steps.changelog.outputs.CHANGELOG }}
           draft: false
           prerelease: false
       - name: Upload artifact
-        run: ./gradlew :ktorclient-auth-clientcredentials:publish -Pversion="${{ env.RELEASE_TAG }}"
+        run: ./gradlew :ktor-client-auth:publish -Pversion="${{ env.RELEASE_TAG }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,18 +12,15 @@ import no.nav.security.token.support.client.core.oauth2.ClientCredentialsTokenCl
 import no.nav.security.token.support.client.core.oauth2.OAuth2AccessTokenService
 import java.net.URI
 
-
 fun Auth.clientCredential(block: ClientCredentialAuthConfig.() -> Unit) {
     with(ClientCredentialAuthConfig().apply(block)) {
         providers.add(ClientCredentialAuthProvider(config))
     }
 }
 
-
 class ClientCredentialAuthConfig {
     lateinit var config: Map<String, String>
 }
-
 
 class ClientCredentialAuthProvider(config: Map<String, String>) : AuthProvider {
     override val sendWithoutRequest: Boolean = true

@@ -39,7 +39,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
 
             pom {
-                name.set("ktorclient-auth-clientcredentials")
+                name.set("ktor-client-auth")
                 url.set("https://github.com/navikt/pensjon-etterlatte-libs")
 
                 licenses {
