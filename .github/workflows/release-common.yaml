@@ -1,4 +1,4 @@
-name: Test, build and release common
+name: Release common
 
 on:
   workflow_dispatch: # Allow manually triggered workflow run
@@ -32,6 +32,8 @@ jobs:
         run: |
           export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M).$(echo $GITHUB_SHA | cut -c 1-12)"
           echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
+#      - name: Build release
+#        run: ./gradlew :common:build -Pversion="${{ env.RELEASE_TAG }}"
       - name: Set changelog
         id: changelog
         # (Escape newlines see https://github.com/actions/create-release/issues/25)
@@ -51,9 +53,7 @@ jobs:
             ${{ steps.changelog.outputs.CHANGELOG }}
           draft: false
           prerelease: false
-      - name: Build release
-        run: ./gradlew :common:build -Pversion=${{ env.RELEASE_TAG }}
       - name: Upload artifact
-        run: ./gradlew :common:publish -Pversion=${{ env.RELEASE_TAG }}
+        run: ./gradlew :common:publish -Pversion="${{ env.RELEASE_TAG }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

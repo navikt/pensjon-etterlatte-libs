@@ -6,13 +6,11 @@ plugins {
     id("ca.cutterslade.analyze") version "1.8.1" apply true
 }
 
-allprojects {
-    group = "no.nav.etterlatte"
+group = "no.nav.etterlatte"
 //    version = blir håndtert av .github/workflows/release-*.yaml
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
 }
 
 dependencies {
