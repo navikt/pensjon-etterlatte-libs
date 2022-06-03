@@ -1,43 +1,26 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm")
     id("maven-publish")
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
     api(kotlin("stdlib"))
     api(kotlin("reflect"))
 
-    api(Jackson.DatatypeJsr310)
-    api(Jackson.DatatypeJdk8)
-    api(Jackson.ModuleKotlin)
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.1")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.12.1")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1")
 
-    implementation(Ktor.ClientCore)
-    implementation(Ktor.ClientLoggingJvm)
-    implementation(Ktor.ClientAuth)
-    implementation(Ktor.ClientJackson)
+    implementation("io.ktor:ktor-client-core:1.6.1")
+    implementation("io.ktor:ktor-client-logging-jvm:1.6.1")
+    implementation("io.ktor:ktor-client-auth:1.6.1")
+    implementation("io.ktor:ktor-client-jackson:1.6.1")
 
-    testImplementation(Jupiter.Api)
-    testImplementation(Jupiter.Params)
-    testRuntimeOnly(Jupiter.Engine)
-    testImplementation(Kotest.AssertionsCore)
-    testImplementation(MockK.MockK)
-    testImplementation(Ktor.ClientMock)
-}
-
-tasks {
-    withType<Test> {
-        useJUnitPlatform()
-    }
-
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "16"
-    }
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("io.ktor:ktor-client-mock:1.6.1")
 }
 
 publishing {

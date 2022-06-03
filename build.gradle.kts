@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import ca.cutterslade.gradle.analyze.AnalyzeDependenciesTask
 
 plugins {
-    `kotlin-dsl`
+    kotlin("jvm") version "1.6.21"
     id("ca.cutterslade.analyze") version "1.8.1" apply true
 }
 
@@ -22,12 +22,26 @@ tasks {
         gradleVersion = "7.3"
     }
 
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     withType<AnalyzeDependenciesTask> {
         warnUsedUndeclared = true
         warnUnusedDeclared = true
+    }
+}
+
+allprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks {
+        withType<Test> {
+            useJUnitPlatform()
+        }
+
+        withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = JavaVersion.VERSION_16.toString()
+        }
     }
 }

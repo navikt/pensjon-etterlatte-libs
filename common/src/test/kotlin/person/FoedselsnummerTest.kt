@@ -1,5 +1,6 @@
 package person
 
+import io.kotest.assertions.fail
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
 import no.nav.etterlatte.libs.common.person.InvalidFoedselsnummer
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -20,6 +21,8 @@ internal class FoedselsnummerTest {
                 { assertEquals(it, Foedselsnummer.of(it).value) }
             }
         )
+
+//        fail("wah")
     }
 
     @Test

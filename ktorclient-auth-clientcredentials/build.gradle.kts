@@ -1,11 +1,3 @@
-plugins {
-    kotlin("jvm")
-}
-
-repositories {
-    mavenCentral()
-    maven("https://packages.confluent.io/maven/")
-}
 
 dependencies {
     api(kotlin("stdlib"))
@@ -17,7 +9,7 @@ dependencies {
     ktor("client-auth")
     ktor("client-jackson")
 
-    api(NavFelles.TokenClientCore)
+    api("no.nav.security:token-client-core:1.3.3")
 }
 
 fun DependencyHandler.ktor(module: String){
