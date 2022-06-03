@@ -1,4 +1,4 @@
-package innsendtsoeknad.common
+package no.nav.etterlatte.libs.common.innsendtsoeknad.common
 
 enum class SoeknadType(val behandlingstema: String) {
     GJENLEVENDEPENSJON("ab0011"),

@@ -46,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ktor-client-auth/${{ env.RELEASE_TAG }}
-          release_name: ktor-client-auth/${{ env.RELEASE_TAG }}
+          tag_name: ktor-client-auth.${{ env.RELEASE_TAG }}
+          release_name: ktor-client-auth.${{ env.RELEASE_TAG }}
           body: |
             Changes in this release
             ${{ steps.changelog.outputs.CHANGELOG }}

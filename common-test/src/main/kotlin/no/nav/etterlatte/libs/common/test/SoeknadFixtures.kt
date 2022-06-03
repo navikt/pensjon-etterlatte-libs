@@ -1,4 +1,4 @@
-package soeknad
+package no.nav.etterlatte.libs.common.test
 
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AndreYtelser
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanning
