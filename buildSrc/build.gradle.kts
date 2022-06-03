@@ -6,14 +6,13 @@ plugins {
     id("ca.cutterslade.analyze") version "1.8.1" apply true
 }
 
-group = "com.github.navikt.etterlatte.libs"
+allprojects {
+    group = "no.nav.etterlatte"
+//    version = blir håndtert av .github/workflows/release-*.yaml
 
-repositories {
-    gradlePluginPortal()
-    maven(
-        //name = "JCenter Gradle Plugins",
-        url = "https://dl.bintray.com/gradle/gradle-plugins"
-    )
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {

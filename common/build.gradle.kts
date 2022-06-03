@@ -54,10 +54,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
 
             pom {
-                groupId = "com.github.navikt.etterlatte.libs"
-                artifactId = "etterlatte-libs-common"
-
-                name.set("pensjon-etterlatte-libs")
+                name.set("etterlatte-common")
                 url.set("https://github.com/navikt/pensjon-etterlatte-libs")
 
                 licenses {
