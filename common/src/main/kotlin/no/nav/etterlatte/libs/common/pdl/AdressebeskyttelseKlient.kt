@@ -1,9 +1,11 @@
 package no.nav.etterlatte.libs.common.pdl
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.accept
 import io.ktor.client.request.header
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
@@ -29,16 +31,16 @@ class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUr
 
         val request = GraphqlRequest(query, Variables(identer = fnrListe.map { it.value }))
 
-        val response = client.post<AdressebeskyttelseResponse>(apiUrl) {
+        val response = client.post(apiUrl) {
             header("Tema", "PEN")
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.Json)
-            body = request
-        }
+            setBody(request)
+        }.body<AdressebeskyttelseResponse>()
 
         // Logge feil dersom det finnes noen
         response.errors?.forEach { error ->
-            logger.error("Feil ved uthenting av adressebeskyttelse", error.toString())
+            logger.error("Feil ved uthenting av adressebeskyttelse: ${error}")
         }
 
         return response
