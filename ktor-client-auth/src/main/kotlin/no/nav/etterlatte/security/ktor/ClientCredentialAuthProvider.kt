@@ -1,10 +1,11 @@
 package no.nav.etterlatte.security.ktor
 
 import com.nimbusds.oauth2.sdk.auth.ClientAuthenticationMethod
-import io.ktor.client.features.auth.*
-import io.ktor.client.request.*
-import io.ktor.http.*
-import io.ktor.http.auth.*
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.AuthProvider
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.http.HttpHeaders
+import io.ktor.http.auth.HttpAuthHeader
 import no.nav.security.token.support.client.core.ClientAuthenticationProperties
 import no.nav.security.token.support.client.core.ClientProperties
 import no.nav.security.token.support.client.core.OAuth2GrantType
@@ -45,7 +46,7 @@ class ClientCredentialAuthProvider(config: Map<String, String>) : AuthProvider {
         return true
     }
 
-    override suspend fun addRequestHeaders(request: HttpRequestBuilder) {
+    override suspend fun addRequestHeaders(request: HttpRequestBuilder, authHeader: HttpAuthHeader?) {
         accessTokenService.getAccessToken(clientPropertiesConfig).accessToken.also {
             request.headers[HttpHeaders.Authorization] = "Bearer $it"
         }

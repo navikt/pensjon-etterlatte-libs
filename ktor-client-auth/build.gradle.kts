@@ -6,22 +6,14 @@ dependencies {
     api(kotlin("stdlib"))
     api(kotlin("reflect"))
 
-    ktor("client-okhttp")
-    ktor("client-core")
-    ktor("client-logging-jvm")
-    ktor("client-auth")
-    ktor("client-jackson")
+    api("io.ktor:ktor-client-okhttp:2.1.1")
+    api("io.ktor:ktor-client-core:2.1.1")
+    api("io.ktor:ktor-client-auth:2.1.1")
+    api("io.ktor:ktor-client-content-negotiation:2.1.1")
+    api("io.ktor:ktor-serialization-jackson:2.1.1")
+    api("io.ktor:ktor-client-logging-jvm:2.1.1")
 
-    api("no.nav.security:token-client-core:1.3.3")
-}
-
-fun DependencyHandler.ktor(module: String){
-    when(module){
-        "client-jackson" -> api("io.ktor:ktor-$module:1.6.1")
-        else -> api("io.ktor:ktor-$module:1.6.1") {
-            exclude("org.jetbrains.kotlin:kotlin-reflect")
-        }
-    }
+    api("no.nav.security:token-client-core:2.1.2")
 }
 
 publishing {
