@@ -42,7 +42,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Samboer
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.JaNeiVetIkke.JA
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.JaNeiVetIkke.NEI
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Verge
-import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevende
+import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Gjenlevende
 import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevendepensjon
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
 import java.time.LocalDate
@@ -223,10 +223,12 @@ object InnsendtSoeknadFixtures {
             eksempelBarn(Foedselsnummer.of("24014021406"), OmsorgspersonType.GJENLEVENDE),
             eksempelBarn(Foedselsnummer.of("29080775995"), OmsorgspersonType.ANNET)
         ),
-        andreStoenader = listOf(Opplysning(
-            svar = EnumSvar(Stoenader.BARNETILSYN, "Jeg har utgifter til barnetilstyn0"),
-            spoersmaal = "Søknad om barnetilsyn"
-        ))
+        andreStoenader = listOf(
+            Opplysning(
+                svar = EnumSvar(Stoenader.BARNETILSYN, "Jeg har utgifter til barnetilstyn0"),
+                spoersmaal = "Søknad om barnetilsyn"
+            )
+        )
     )
 }
 
