@@ -3,13 +3,20 @@ package no.nav.etterlatte.libs.common.innsendtsoeknad.common
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AarstallForMilitaerTjeneste
+import no.nav.etterlatte.libs.common.innsendtsoeknad.AndreYtelser
+import no.nav.etterlatte.libs.common.innsendtsoeknad.AnnenUtdanning
+import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanning
+import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoede
+import no.nav.etterlatte.libs.common.innsendtsoeknad.HoeyesteUtdanning
+import no.nav.etterlatte.libs.common.innsendtsoeknad.Kontaktinfo
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Naeringsinntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OmsorgspersonType
+import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtland
 import no.nav.etterlatte.libs.common.innsendtsoeknad.SamboerInntekt
+import no.nav.etterlatte.libs.common.innsendtsoeknad.SivilstatusType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Utenlandsadresse
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Utenlandsopphold
 import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.GjenlevendeForelder
-import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevende
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
 
 @JsonTypeInfo(
@@ -51,6 +58,28 @@ data class Innsender(
     override val foedselsnummer: Opplysning<Foedselsnummer>
 ) : Person {
     override val type: PersonType = PersonType.INNSENDER
+}
+
+data class Gjenlevende(
+    override val fornavn: Opplysning<String>,
+    override val etternavn: Opplysning<String>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>,
+
+    val statsborgerskap: Opplysning<String>,
+    val sivilstatus: Opplysning<String>,
+    val adresse: Opplysning<String>?,
+    val bostedsAdresse: Opplysning<FritekstSvar>?,
+    val kontaktinfo: Kontaktinfo,
+    val flyktning: Opplysning<EnumSvar<JaNeiVetIkke>>?,
+    val oppholdUtland: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtland?>?,
+    val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
+    val arbeidOgUtdanning: ArbeidOgUtdanning?,
+    val fullfoertUtdanning: BetingetOpplysning<EnumSvar<HoeyesteUtdanning>, Opplysning<AnnenUtdanning>?>?,
+    val andreYtelser: AndreYtelser,
+    val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
+    val forholdTilAvdoede: ForholdTilAvdoede,
+) : Person {
+    override val type = PersonType.GJENLEVENDE
 }
 
 data class Forelder(

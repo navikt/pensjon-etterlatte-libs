@@ -1,9 +1,8 @@
-package no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon
+package no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import no.nav.etterlatte.libs.common.innsendtsoeknad.BankkontoType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Spraak
-import no.nav.etterlatte.libs.common.innsendtsoeknad.Stoenader
 import no.nav.etterlatte.libs.common.innsendtsoeknad.UtbetalingsInformasjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Avdoed
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Barn
@@ -18,19 +17,18 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
 import java.time.LocalDateTime
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class Gjenlevendepensjon(
+data class Omstillingsstoenad(
     override val imageTag: ImageTag,
     override val spraak: Spraak,
     override val innsender: Innsender,
-    override val soeker: Gjenlevende,
     override val harSamtykket: Opplysning<Boolean>,
     override val utbetalingsInformasjon: BetingetOpplysning<EnumSvar<BankkontoType>, UtbetalingsInformasjon>?,
 
+    override val soeker: Gjenlevende,
     val avdoed: Avdoed,
     val barn: List<Barn>,
-    val andreStoenader: List<Opplysning<EnumSvar<Stoenader>>> = emptyList()
 ) : InnsendtSoeknad {
-    override val versjon = "2"
-    override val type: SoeknadType = SoeknadType.GJENLEVENDEPENSJON
+    override val versjon = "1"
+    override val type: SoeknadType = SoeknadType.OMSTILLINGSSTOENAD
     override val mottattDato: LocalDateTime = LocalDateTime.now()
 }
