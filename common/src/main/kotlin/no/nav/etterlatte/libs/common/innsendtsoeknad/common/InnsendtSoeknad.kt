@@ -3,12 +3,12 @@ package no.nav.etterlatte.libs.common.innsendtsoeknad.common
 import com.fasterxml.jackson.annotation.JsonGetter
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.BankkontoType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Spraak
 import no.nav.etterlatte.libs.common.innsendtsoeknad.UtbetalingsInformasjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.Barnepensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevendepensjon
+import no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad.Omstillingsstoenad
 import java.time.LocalDateTime
 
 @JsonTypeInfo(
@@ -18,7 +18,8 @@ import java.time.LocalDateTime
 )
 @JsonSubTypes(
     JsonSubTypes.Type(value = Gjenlevendepensjon::class, name = "GJENLEVENDEPENSJON"),
-    JsonSubTypes.Type(value = Barnepensjon::class, name = "BARNEPENSJON")
+    JsonSubTypes.Type(value = Barnepensjon::class, name = "BARNEPENSJON"),
+    JsonSubTypes.Type(value = Omstillingsstoenad::class, name = "OMSTILLINGSSTOENAD")
 )
 interface InnsendtSoeknad {
     val versjon: String
