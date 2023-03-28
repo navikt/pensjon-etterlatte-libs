@@ -28,7 +28,7 @@ internal class PersonerTest {
 
         val serialized = mapper.writeValueAsString(verge)
 
-        val deserialized = mapper.readValue(serialized, jacksonTypeRef<Person>())
+        val deserialized = mapper.readValue(serialized, jacksonTypeRef<Verge>())
 
         (deserialized is Verge) shouldBe true
         deserialized.fornavn shouldBe verge.fornavn
@@ -44,7 +44,7 @@ internal class PersonerTest {
 
         val serialized = mapper.writeValueAsString(verge)
 
-        val deserialized = mapper.readValue(serialized, jacksonTypeRef<Person>())
+        val deserialized = mapper.readValue(serialized, jacksonTypeRef<Verge>())
 
         (deserialized is Verge) shouldBe true
         deserialized.fornavn shouldBe verge.fornavn
