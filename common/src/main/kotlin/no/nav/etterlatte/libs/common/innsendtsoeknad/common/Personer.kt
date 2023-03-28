@@ -36,9 +36,9 @@ import no.nav.etterlatte.libs.common.person.Foedselsnummer
 )
 interface Person {
     val type: PersonType
-    val fornavn: Opplysning<String>?
-    val etternavn: Opplysning<String>?
-    val foedselsnummer: Opplysning<Foedselsnummer>?
+    val fornavn: Opplysning<String>
+    val etternavn: Opplysning<String>
+    val foedselsnummer: Opplysning<Foedselsnummer>
 }
 
 enum class PersonType {
@@ -122,11 +122,11 @@ data class Avdoed(
 }
 
 data class Verge(
-    override val fornavn: Opplysning<String>? = null,
-    override val etternavn: Opplysning<String>? = null,
-    override val foedselsnummer: Opplysning<Foedselsnummer>? = null,
-) : Person {
-    override val type = PersonType.VERGE
+    val fornavn: Opplysning<String>? = null,
+    val etternavn: Opplysning<String>? = null,
+    val foedselsnummer: Opplysning<Foedselsnummer>? = null,
+) {
+    val type = PersonType.VERGE
 }
 
 data class Samboer(
