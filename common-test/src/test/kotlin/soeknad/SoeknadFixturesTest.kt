@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test
 class SoeknadFixturesTest {
 
     @Test
-    fun `Skal laste innsendt søknad fixtures`() {
+    fun `Skal laste innsendt soeknad fixtures`() {
         InnsendtSoeknadFixtures.gjenlevendepensjon()
         InnsendtSoeknadFixtures.barnepensjon()
+        InnsendtSoeknadFixtures.omstillingsSoeknad()
     }
 }
