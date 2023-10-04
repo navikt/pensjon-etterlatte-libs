@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # ==============
+  # KOTLIN BACKEND
+  # ==============
+
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "sunday"
+    open-pull-requests-limit: 10
+    groups:
+      test:
+        - "org.junit.jupiter*"
+        - "io.mockk*"
+        - "io.kotest*"
+
+
+  # ==============
+  # GITHUB ACTIONS
+  # ==============
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "sunday"
