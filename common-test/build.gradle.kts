@@ -1,21 +1,22 @@
 plugins {
     id("maven-publish")
+    id("etterlatte")
 }
 
 dependencies {
     api(kotlin("stdlib"))
     api(kotlin("reflect"))
 
-    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4")
-    api("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4")
-    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.4")
+    api(libs.jackson.datatypejsr310)
+    api(libs.jackson.datatypejdk8)
+    api(libs.jackson.modulekotlin)
 
     implementation(project(":common"))
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
-    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
+    testImplementation(libs.test.jupiter.api)
+    testImplementation(libs.test.jupiter.params)
+    testRuntimeOnly(libs.test.jupiter.engine)
+    testImplementation(libs.test.kotest.assertionscore)
 }
 
 publishing {

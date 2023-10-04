@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import ca.cutterslade.gradle.analyze.AnalyzeDependenciesTask
 
 plugins {
-    kotlin("jvm") version "1.6.21"
-    id("ca.cutterslade.analyze") version "1.8.1" apply true
+    `kotlin-dsl`
+    alias(libs.plugins.cutterslade.analyze) apply true
 }
 
 repositories {
@@ -12,6 +12,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("gradle-plugin"))
+
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 tasks {
@@ -41,7 +43,7 @@ allprojects {
         }
 
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = JavaVersion.VERSION_16.toString()
+            kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 }

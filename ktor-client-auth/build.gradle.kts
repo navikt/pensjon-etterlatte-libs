@@ -1,19 +1,20 @@
 plugins {
     id("maven-publish")
+    id("etterlatte")
 }
 
 dependencies {
     api(kotlin("stdlib"))
     api(kotlin("reflect"))
 
-    api("io.ktor:ktor-client-okhttp:2.1.1")
-    api("io.ktor:ktor-client-core:2.1.1")
-    api("io.ktor:ktor-client-auth:2.1.1")
-    api("io.ktor:ktor-client-content-negotiation:2.1.1")
-    api("io.ktor:ktor-serialization-jackson:2.1.1")
-    api("io.ktor:ktor-client-logging-jvm:2.1.1")
+    api(libs.ktor2.okhttp)
+    api(libs.ktor2.clientcore)
+    api(libs.ktor2.clientauth)
+    api(libs.ktor2.clientcontentnegotiation)
+    api(libs.ktor2.jackson)
+    api(libs.ktor2.clientloggingjvm)
 
-    api("no.nav.security:token-client-core:2.1.2")
+    api(libs.navfelles.tokenclientcore)
 }
 
 publishing {
