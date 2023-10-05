@@ -11,9 +11,10 @@ updates:
     open-pull-requests-limit: 10
     groups:
       test:
-        - "org.junit.jupiter*"
-        - "io.mockk*"
-        - "io.kotest*"
+        patterns:
+          - "org.junit.jupiter*"
+          - "io.mockk*"
+          - "io.kotest*"
 
 
   # ==============
