@@ -5,7 +5,7 @@ updates:
   # ==============
 
   - package-ecosystem: "gradle"
-    directory: "/"
+    directory: "/buildSrc"
     schedule:
       interval: "monthly"
       day: "sunday"
