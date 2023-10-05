@@ -5,7 +5,7 @@ updates:
   # ==============
 
   - package-ecosystem: "gradle"
-    directory: "/buildSrc"
+    directory: "/"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
