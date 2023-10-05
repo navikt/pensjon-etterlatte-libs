@@ -2,8 +2,6 @@ name: Verify libs
 
 on:
   push:
-    branches-ignore:
-      - main
 
 jobs:
   verify-branches:
