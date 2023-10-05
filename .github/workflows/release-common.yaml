@@ -10,9 +10,6 @@ jobs:
   build:
     name: Verification
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
@@ -28,6 +25,9 @@ jobs:
     name: Create Release
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
