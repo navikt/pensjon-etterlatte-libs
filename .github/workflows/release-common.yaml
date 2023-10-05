@@ -19,7 +19,7 @@ jobs:
 
       # Build
       - name: Test and build
-        run: ./gradlew :common:test :common:build
+        run: ./gradlew :common:build
 
   release:
     name: Create Release
