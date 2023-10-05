@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
       - name: Set release tag
         run: |
           export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M).$(echo $GITHUB_SHA | cut -c 1-12)"
