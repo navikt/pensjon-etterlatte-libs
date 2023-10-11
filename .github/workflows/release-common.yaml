@@ -19,7 +19,7 @@ jobs:
 
       # Build
       - name: Test and build
-        run: ./gradlew :common:test :common:build
+        run: ./gradlew :common:build
 
   release:
     name: Create Release
@@ -32,20 +32,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
       - name: Set release tag
         run: |
           export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M).$(echo $GITHUB_SHA | cut -c 1-12)"
           echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
-        uses: actions/create-release@latest
+        uses: elgohr/Github-Release-Action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: common.${{ env.RELEASE_TAG }}
-          release_name: common.${{ env.RELEASE_TAG }}
-          draft: false
-          prerelease: false
+          title: common.${{ env.RELEASE_TAG }}
       - name: Upload artifact
         run: ./gradlew :common:publish -Pversion="${{ env.RELEASE_TAG }}"
         env:
