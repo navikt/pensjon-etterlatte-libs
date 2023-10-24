@@ -11,7 +11,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Opplysning
 
 data class Utenlandsadresse(
     val land: Opplysning<FritekstSvar>,
-    val adresse: Opplysning<FritekstSvar>
+    val adresse: Opplysning<FritekstSvar>? = null
 )
 
 data class UtbetalingsInformasjon(
