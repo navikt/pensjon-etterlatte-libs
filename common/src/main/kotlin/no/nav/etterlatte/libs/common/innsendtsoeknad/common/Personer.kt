@@ -98,6 +98,7 @@ data class Barn(
     val statsborgerskap: Opplysning<String>,
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
     val foreldre: List<Forelder>,
+    val ukjentForelder: Opplysning<String>?,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {
