@@ -3,7 +3,7 @@ cutterslade-analyze = { id = "ca.cutterslade.analyze", version = "1.9.1" }
 
 [versions]
 jackson-version = "2.15.3"
-jupiter-version = "5.10.0"
+jupiter-version = "5.10.1"
 ktor2-version = "2.3.5"
 navfelles-token-version = "3.1.7"
 
@@ -29,5 +29,5 @@ navfelles-tokenvalidationktor2 = { module = "no.nav.security:token-validation-kt
 test-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter-version" }
 test-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jupiter-version" }
 test-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter-version" }
-test-kotest-assertionscore = { module = "io.kotest:kotest-assertions-core", version = "5.7.2" }
+test-kotest-assertionscore = { module = "io.kotest:kotest-assertions-core", version = "5.8.0" }
 test-mockk = { module = "io.mockk:mockk", version = "1.13.8" }
