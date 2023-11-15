@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - ktor-client-auth
+      - gradle/libs.versions.toml
 
 jobs:
   build:

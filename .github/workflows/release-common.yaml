@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - common
+      - gradle/libs.versions.toml
 
 jobs:
   build:
