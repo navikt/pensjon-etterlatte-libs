@@ -5,7 +5,7 @@ cutterslade-analyze = { id = "ca.cutterslade.analyze", version = "1.9.1" }
 jackson-version = "2.16.0"
 jupiter-version = "5.10.1"
 ktor2-version = "2.3.6"
-navfelles-token-version = "3.1.8"
+navfelles-token-version = "3.1.9"
 
 [libraries]
 jackson-datatypejsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson-version" }
