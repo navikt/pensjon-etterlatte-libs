@@ -12,6 +12,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.Kontaktinfo
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Naeringsinntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OmsorgspersonType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtland
+import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtlandInformasjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.SamboerInntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.SivilstatusType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Utenlandsadresse
@@ -97,7 +98,9 @@ data class Barn(
 
     val statsborgerskap: Opplysning<String>,
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
+    val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>? = null,
     val foreldre: List<Forelder>,
+    val ukjentForelder: Opplysning<String>? = null,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {

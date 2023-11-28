@@ -11,7 +11,13 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Opplysning
 
 data class Utenlandsadresse(
     val land: Opplysning<FritekstSvar>,
-    val adresse: Opplysning<FritekstSvar>
+    val adresse: Opplysning<FritekstSvar>? = null
+)
+
+data class OppholdUtlandInformasjon(
+    val oppholdLand: Opplysning<FritekstSvar>,
+    val oppholdFra: Opplysning<DatoSvar>? = null,
+    val oppholdTil: Opplysning<DatoSvar>? = null,
 )
 
 data class UtbetalingsInformasjon(
@@ -161,5 +167,10 @@ data class PensjonUtland(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class OppholdUtland(
-    val land: Opplysning<FritekstSvar>,
+    val land: Opplysning<FritekstSvar>? = null, // Kan ikke fjernes før gjenlevendepensjon sin søknad er fjernet
+    val bosattLand: Opplysning<FritekstSvar>? = null,
+    val oppholderSegIUtlandet: Opplysning<JaNeiVetIkke>? = null,
+    val oppholdsland: Opplysning<FritekstSvar>? = null,
+    val oppholdFra: Opplysning<DatoSvar>? = null,
+    val oppholdTil: Opplysning<DatoSvar>? = null,
 )
