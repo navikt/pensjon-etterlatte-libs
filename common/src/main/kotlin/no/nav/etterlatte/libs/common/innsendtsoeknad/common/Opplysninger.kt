@@ -14,6 +14,12 @@ data class Utenlandsadresse(
     val adresse: Opplysning<FritekstSvar>? = null
 )
 
+data class OppholdUtlandInformasjon(
+    val oppholdLand: Opplysning<FritekstSvar>,
+    val oppholdFra: Opplysning<DatoSvar>? = null,
+    val oppholdTil: Opplysning<DatoSvar>? = null,
+)
+
 data class UtbetalingsInformasjon(
     val kontonummer: Opplysning<FritekstSvar>? = null,
     val utenlandskBankNavn: Opplysning<FritekstSvar>? = null,
@@ -161,5 +167,10 @@ data class PensjonUtland(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class OppholdUtland(
-    val land: Opplysning<FritekstSvar>,
+    val land: Opplysning<FritekstSvar>?, // Kan ikke fjernes før gjenlevendepensjon sin søknad er fjernet
+    val bosattLand: Opplysning<FritekstSvar>?,
+    val oppholderSegIUtlandet: Opplysning<JaNeiVetIkke>?,
+    val oppholdsland: Opplysning<FritekstSvar>?,
+    val oppholdFra: Opplysning<DatoSvar>?,
+    val oppholdTil: Opplysning<DatoSvar>?,
 )
