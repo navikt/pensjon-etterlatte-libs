@@ -441,6 +441,7 @@ fun eksempelBarn(fnr: Foedselsnummer, dagligOmsorg: OmsorgspersonType? = null) =
         )
     ),
     ukjentForelder = null,
+    bosattNorge = BetingetOpplysning(EnumSvar(JA, "Ja"), opplysning = null),
     verge = BetingetOpplysning(
         svar = EnumSvar(JA, "Ja"),
         opplysning = Verge(
