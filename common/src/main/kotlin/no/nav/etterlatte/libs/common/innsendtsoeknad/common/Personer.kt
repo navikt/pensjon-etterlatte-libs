@@ -98,9 +98,9 @@ data class Barn(
 
     val statsborgerskap: Opplysning<String>,
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
-    val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>?,
+    val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>? = null,
     val foreldre: List<Forelder>,
-    val ukjentForelder: Opplysning<String>?,
+    val ukjentForelder: Opplysning<String>? = null,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {

@@ -440,8 +440,6 @@ fun eksempelBarn(fnr: Foedselsnummer, dagligOmsorg: OmsorgspersonType? = null) =
             foedselsnummer = Opplysning(Foedselsnummer.of("24014021406"))
         )
     ),
-    ukjentForelder = null,
-    bosattNorge = BetingetOpplysning(EnumSvar(JA, "Ja"), opplysning = null),
     verge = BetingetOpplysning(
         svar = EnumSvar(JA, "Ja"),
         opplysning = Verge(
