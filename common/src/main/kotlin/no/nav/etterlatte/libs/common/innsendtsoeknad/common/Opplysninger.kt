@@ -169,7 +169,7 @@ data class PensjonUtland(
 data class OppholdUtland(
     val land: Opplysning<FritekstSvar>? = null, // Kan ikke fjernes før gjenlevendepensjon sin søknad er fjernet
     val bosattLand: Opplysning<FritekstSvar>? = null,
-    val oppholderSegIUtlandet: Opplysning<JaNeiVetIkke>? = null,
+    val oppholderSegIUtlandet: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
     val oppholdsland: Opplysning<FritekstSvar>? = null,
     val oppholdFra: Opplysning<DatoSvar>? = null,
     val oppholdTil: Opplysning<DatoSvar>? = null,
