@@ -45,6 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           title: common.dev
+          prerelease: true
       - name: Upload artifact
         run: ./gradlew :common:publish -Pversion="dev"
         env:
