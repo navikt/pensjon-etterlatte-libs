@@ -78,7 +78,7 @@ data class Gjenlevende(
     val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
     val arbeidOgUtdanning: ArbeidOgUtdanning?,
     val fullfoertUtdanning: BetingetOpplysning<EnumSvar<HoeyesteUtdanning>, Opplysning<AnnenUtdanning>?>?,
-    val fullfoerteUtdanninger: Opplysning<EnumSvar<HoeyesteUtdanning>>?,
+    val fullfoerteUtdanninger: Opplysning<List<EnumSvar<HoeyesteUtdanning>>>?,
     val andreYtelser: AndreYtelser?,
     val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val forholdTilAvdoede: ForholdTilAvdoede,
