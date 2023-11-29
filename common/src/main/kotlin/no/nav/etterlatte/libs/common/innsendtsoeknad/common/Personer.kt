@@ -8,6 +8,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.AnnenUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoede
 import no.nav.etterlatte.libs.common.innsendtsoeknad.HoeyesteUtdanning
+import no.nav.etterlatte.libs.common.innsendtsoeknad.InntektOgPensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Kontaktinfo
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Naeringsinntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OmsorgspersonType
@@ -71,14 +72,20 @@ data class Gjenlevende(
     val adresse: Opplysning<String>?,
     val bostedsAdresse: Opplysning<FritekstSvar>?,
     val kontaktinfo: Kontaktinfo,
+
     val flyktning: Opplysning<EnumSvar<JaNeiVetIkke>>?,
     val oppholdUtland: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtland?>?,
     val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
     val arbeidOgUtdanning: ArbeidOgUtdanning?,
     val fullfoertUtdanning: BetingetOpplysning<EnumSvar<HoeyesteUtdanning>, Opplysning<AnnenUtdanning>?>?,
-    val andreYtelser: AndreYtelser,
+    val fullfoerteUtdanninger: Opplysning<EnumSvar<HoeyesteUtdanning>>?,
+    val andreYtelser: AndreYtelser?,
     val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val forholdTilAvdoede: ForholdTilAvdoede,
+    val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+
+    // OMS
+    val inntektOgPensjon: InntektOgPensjon? = null
 ) : Person {
     override val type = PersonType.GJENLEVENDE
 }

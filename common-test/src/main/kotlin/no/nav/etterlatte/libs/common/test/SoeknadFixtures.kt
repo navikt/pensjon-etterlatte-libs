@@ -123,12 +123,6 @@ object InnsendtSoeknadFixtures {
                 telefonnummer = Opplysning(FritekstSvar("97611679"))
             ),
             flyktning = Opplysning(EnumSvar(NEI, "Nei")),
-            oppholdUtland = BetingetOpplysning(
-                svar = EnumSvar(NEI, "Nei"),
-                opplysning = OppholdUtland(
-                    land = Opplysning(FritekstSvar("Sverige")),
-                )
-            ),
             nySivilstatus = BetingetOpplysning(
                 svar = EnumSvar(SivilstatusType.SAMBOERSKAP, "Samboer"),
                 opplysning = Samboer(
@@ -163,7 +157,12 @@ object InnsendtSoeknadFixtures {
                             endretInntekt = BetingetOpplysning(
                                 svar = EnumSvar(JA, "Ja"),
                                 opplysning = Opplysning(FritekstSvar("Mye har skjedd i det siste"))
-                            )
+                            ),
+                            arbeidsmengde = null,
+                            harSluttDato = null,
+                            sluttDato = null,
+                            endretArbeidssituasjon = null,
+                            sagtOppEllerRedusert = null,
                         )
                     )
                 ),
@@ -175,7 +174,9 @@ object InnsendtSoeknadFixtures {
                             endretInntekt = BetingetOpplysning(
                                 svar = EnumSvar(JA, "Ja"),
                                 opplysning = Opplysning(FritekstSvar("Fremdeles mye som har skjedd.."))
-                            )
+                            ),
+                            endretArbeidssituasjon = null,
+                            arbeidsmengde = null
                         )
                     )
                 ),
@@ -183,10 +184,21 @@ object InnsendtSoeknadFixtures {
                     Utdanning(
                         navn = Opplysning(FritekstSvar("Norges IT høyskole")),
                         startDato = Opplysning(DatoSvar(LocalDate.now().minusYears(1))),
-                        sluttDato = Opplysning(DatoSvar(LocalDate.now().plusYears(2)))
+                        sluttDato = Opplysning(DatoSvar(LocalDate.now().plusYears(2))),
+                        studiested = null,
+                        studie = null,
+                        studieform = null,
+                        studieprosent = null,
+                        godkjentUtdanning = null
                     )
                 ),
-                annet = Opplysning(EnumSvar(innhold = "Annet", verdi = IngenJobb.ANNET))
+                annet = Opplysning(EnumSvar(innhold = "Annet", verdi = IngenJobb.ANNET)),
+                etablererVirksomhet = null,
+                tilbud = null,
+                arbeidssoeker = null,
+                annenSituasjon = null,
+                selvstendigAS = null,
+                selvstendigENK = null
             ),
             fullfoertUtdanning = BetingetOpplysning(
                 svar = EnumSvar(HoeyesteUtdanning.ANNEN, "Annen"),
@@ -217,7 +229,14 @@ object InnsendtSoeknadFixtures {
                 datoForInngaattPartnerskap = Opplysning(DatoSvar(LocalDate.now().minusYears(20))),
                 fellesBarn = Opplysning(EnumSvar(JA, "Ja")),
                 omsorgForBarn = Opplysning(EnumSvar(NEI, "Nei"))
-            )
+            ),
+            oppholdUtland = BetingetOpplysning(
+                svar = EnumSvar(NEI, "Nei"),
+                opplysning = OppholdUtland(
+                    land = Opplysning(FritekstSvar("Sverige")),
+                )
+            ),
+            fullfoerteUtdanninger = null
         ),
         avdoed = eksempelAvdoed(),
         barn = listOf(
@@ -367,7 +386,8 @@ object InnsendtSoeknadFixtures {
                     omsorgForBarn = null,
                     mottokBidrag = null,
                     mottokEktefelleBidrag = null
-                )
+                ),
+                fullfoerteUtdanninger = null
             ),
             avdoed = Avdoed(
                 fornavn = Opplysning(svar = "Bernt", spoersmaal = null),
