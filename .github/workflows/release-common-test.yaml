@@ -46,7 +46,7 @@ jobs:
         with:
           title: common-test.dev
       - name: Upload artifact
-        run: ./gradlew :common-test:publish -Pversion="dev"
+        run: ./gradlew :common-test:publish -Pversion="dev" -Doptions="update"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
