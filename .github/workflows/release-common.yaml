@@ -47,7 +47,7 @@ jobs:
           title: common.dev
           prerelease: true
       - name: Upload artifact
-        run: ./gradlew :common:publish -Pversion="dev"
+        run: ./gradlew :common:publish -Pversion="dev.$(echo $GITHUB_SHA | cut -c 1-12).dev"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
