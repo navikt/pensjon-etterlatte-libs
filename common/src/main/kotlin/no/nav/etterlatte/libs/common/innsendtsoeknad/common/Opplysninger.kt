@@ -121,6 +121,20 @@ data class ForholdTilAvdoede(
     val fellesBarn: Opplysning<EnumSvar<JaNeiVetIkke>>?,
     val samboereMedFellesBarnFoerGiftemaal: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
     val tidligereGift: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+    val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+    val mottokBidrag: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<FritekstSvar>?>? = null, // Finner ikke igjen
+    val mottokEktefelleBidrag: Opplysning<EnumSvar<JaNeiVetIkke>>? = null, // Finner ikke igjen?
+)
+
+data class ForholdTilAvdoedeOMS(
+    val relasjon: Opplysning<EnumSvar<ForholdTilAvdoedeType>>,
+    val datoForInngaattPartnerskap: Opplysning<DatoSvar>? = null,
+    val datoForInngaattSamboerskap: Opplysning<DatoSvar>? = null,
+    val datoForSkilsmisse: Opplysning<DatoSvar>? = null,
+    val datoForSamlivsbrudd: Opplysning<DatoSvar>? = null,
+    val fellesBarn: Opplysning<EnumSvar<JaNeiVetIkke>>?,
+    val samboereMedFellesBarnFoerGiftemaal: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+    val tidligereGift: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
     val mottokBidrag: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<FritekstSvar>?>? = null,
 )
 
@@ -143,11 +157,9 @@ typealias AarstallForMilitaerTjeneste = FritekstSvar
 data class ArbeidOgUtdanning(
     val dinSituasjon: Opplysning<List<EnumSvar<JobbStatusType>>>,
     val arbeidsforhold: Opplysning<List<Arbeidstaker>>?,
+    val selvstendig: Opplysning<List<SelvstendigNaeringsdrivende>>?,
     val utdanning: Opplysning<Utdanning>?,
     val annet: Opplysning<EnumSvar<IngenJobb>>?,
-    val selvstendig: Opplysning<List<SelvstendigNaeringsdrivende>>?,
-    val arbeidssoeker: Opplysning<Arbeidssoeker>?,
-    val annenSituasjon: Opplysning<AnnenSituasjon>?,
 )
 
 data class ArbeidOgUtdanningOMS(
@@ -162,9 +174,9 @@ data class ArbeidOgUtdanningOMS(
 )
 
 data class Utdanning(
+    val navn: Opplysning<FritekstSvar>,
     val startDato: Opplysning<DatoSvar>,
     val sluttDato: Opplysning<DatoSvar>,
-    val navn: Opplysning<FritekstSvar>?,
 )
 
 data class UtdanningOMS(
@@ -194,7 +206,7 @@ typealias EndretInntektBegrunnelse = FritekstSvar
 data class SelvstendigNaeringsdrivende(
     val firmanavn: Opplysning<FritekstSvar>,
     val orgnr: Opplysning<FritekstSvar>,
-    val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>?,
+    val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>,
 )
 
 data class SelvstendigNaeringsdrivendeOMS(
@@ -207,8 +219,8 @@ data class SelvstendigNaeringsdrivendeOMS(
 data class Arbeidstaker(
     val arbeidsgiver: Opplysning<FritekstSvar>,
     val ansettelsesforhold: Opplysning<EnumSvar<StillingType>>,
-    val stillingsprosent: Opplysning<FritekstSvar>?,
-    val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>?
+    val stillingsprosent: Opplysning<FritekstSvar>,
+    val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>
 )
 
 data class ArbeidstakerOMS(
@@ -349,7 +361,7 @@ data class PensjonUtland(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class OppholdUtland(
-    val land: Opplysning<FritekstSvar>?
+    val land: Opplysning<FritekstSvar>? = null
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

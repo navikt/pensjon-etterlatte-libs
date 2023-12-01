@@ -8,6 +8,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.AnnenUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanningOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoede
+import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoedeOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.HoeyesteUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.InntektOgPensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Kontaktinfo
@@ -80,10 +81,9 @@ data class Gjenlevende(
     val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
     val arbeidOgUtdanning: ArbeidOgUtdanning?,
     val fullfoertUtdanning: BetingetOpplysning<EnumSvar<HoeyesteUtdanning>, Opplysning<AnnenUtdanning>?>?,
-    val andreYtelser: AndreYtelser?,
+    val andreYtelser: AndreYtelser,
     val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val forholdTilAvdoede: ForholdTilAvdoede,
-    val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
 ) : Person {
     override val type = PersonType.GJENLEVENDE
 }
@@ -106,7 +106,7 @@ data class GjenlevendeOMS(
     val fullfoertUtdanning: Opplysning<List<EnumSvar<HoeyesteUtdanning>>>?,
     val inntektOgPensjon: InntektOgPensjon,
     val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
-    val forholdTilAvdoede: ForholdTilAvdoede,
+    val forholdTilAvdoede: ForholdTilAvdoedeOMS,
     val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>
 ) : Person {
     override val type = PersonType.GJENLEVENDE
@@ -129,6 +129,7 @@ data class Barn(
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
     val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>? = null,
     val foreldre: List<Forelder>,
+    val ukjentForelder: Opplysning<String>? = null,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {
