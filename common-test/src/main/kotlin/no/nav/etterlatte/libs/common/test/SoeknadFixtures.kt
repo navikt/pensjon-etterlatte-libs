@@ -6,6 +6,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanningOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Arbeidstaker
 import no.nav.etterlatte.libs.common.innsendtsoeknad.BankkontoType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoede
+import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoedeOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoedeType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.HoeyesteUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.IngenJobb
@@ -187,9 +188,7 @@ object InnsendtSoeknadFixtures {
                         sluttDato = Opplysning(DatoSvar(LocalDate.now().plusYears(2))),
                     )
                 ),
-                annet = Opplysning(EnumSvar(innhold = "Annet", verdi = IngenJobb.ANNET)),
-                arbeidssoeker = null,
-                annenSituasjon = null,
+                annet = Opplysning(EnumSvar(innhold = "Annet", verdi = IngenJobb.ANNET))
             ),
             fullfoertUtdanning = BetingetOpplysning(
                 svar = EnumSvar(HoeyesteUtdanning.ANNEN, "Annen"),
@@ -353,7 +352,7 @@ object InnsendtSoeknadFixtures {
                     ),
                     spoersmaal = null
                 ),
-                forholdTilAvdoede = ForholdTilAvdoede(
+                forholdTilAvdoede = ForholdTilAvdoedeOMS(
                     relasjon = Opplysning(
                         svar = EnumSvar(
                             verdi = ForholdTilAvdoedeType.GIFT,
@@ -368,7 +367,7 @@ object InnsendtSoeknadFixtures {
                     fellesBarn = null,
                     samboereMedFellesBarnFoerGiftemaal = null,
                     tidligereGift = null,
-                    mottokBidrag = null,
+                    mottokBidrag = null
                 ),
                 inntektOgPensjon = InntektOgPensjon(
                     loennsinntekt = null,
