@@ -3,10 +3,15 @@ package innsendtsoeknad.common
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
+import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.Barnepensjon
+import no.nav.etterlatte.libs.common.innsendtsoeknad.common.InnsendtSoeknad
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadRequest
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
+import no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad.Omstillingsstoenad
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class InnsendtSoeknadTest {
@@ -29,5 +34,21 @@ internal class InnsendtSoeknadTest {
         val barnepensjon = deserialized.soeknader.last()
         barnepensjon.type shouldBe SoeknadType.BARNEPENSJON
         barnepensjon.template() shouldBe "barnepensjon_v2"
+    }
+
+    @Test
+    fun `Deserialisering av barnepensjon`() {
+        val json = javaClass.getResource("/soeknad/barnepensjon.json")!!.readText()
+
+        val soeknad = mapper.readValue<InnsendtSoeknad>(json)
+        assertTrue(soeknad is Barnepensjon)
+    }
+
+    @Test
+    fun `Deserialisering av barnepensjon utland`() {
+        val json = javaClass.getResource("/soeknad/barnepensjon_utland.json")!!.readText()
+
+        val soeknad = mapper.readValue<InnsendtSoeknad>(json)
+        assertTrue(soeknad is Barnepensjon)
     }
 }

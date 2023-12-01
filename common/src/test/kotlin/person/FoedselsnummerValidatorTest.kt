@@ -17,9 +17,27 @@ internal class FoedselsnummerValidatorTest {
     }
 
     @Test
+    fun `Sjekk diverse syntetiske fnr`() {
+        isValid("07823847585") shouldBe true
+        isValid("24910198617") shouldBe true
+        isValid("06859597627") shouldBe true
+        isValid("21919898760") shouldBe true
+        isValid("12900799991") shouldBe true
+        isValid("20840699480") shouldBe true
+        isValid("27813648046") shouldBe true
+        isValid("07823847585") shouldBe true
+        isValid("24910198617") shouldBe true
+        isValid("06859597627") shouldBe true
+        isValid("21919898760") shouldBe true
+        isValid("06488309690") shouldBe true
+        isValid("30017215759") shouldBe true
+    }
+
+    @Test
     fun `Sjekk diverse ugyldige numeriske verdier`() {
         isValid("1234") shouldBe false
 
+        isValid("15048900000") shouldBe false
         isValid("00000000000") shouldBe false
         isValid("11111111111") shouldBe false
         isValid("22222222222") shouldBe false
