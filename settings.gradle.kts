@@ -1,7 +1,7 @@
 rootProject.name = "no.nav.etterlatte"
 
 plugins {
-    kotlin("jvm") version "1.8.22" apply false
+    kotlin("jvm") version "1.9.21" apply false
 }
 
 include(
