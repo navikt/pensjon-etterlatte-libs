@@ -36,7 +36,6 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.YtelserNav
 import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.Barnepensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.GjenlevendeForelder
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Avdoed
-import no.nav.etterlatte.libs.common.innsendtsoeknad.common.AvdoedOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Barn
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.BetingetOpplysning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.DatoSvar
@@ -401,7 +400,7 @@ object InnsendtSoeknadFixtures {
                     )
                 )
             ),
-            avdoed = AvdoedOMS(
+            avdoed = Avdoed(
                 fornavn = Opplysning(svar = "Bernt", spoersmaal = null),
                 etternavn = Opplysning(svar = "Jakobsen", spoersmaal = null),
                 foedselsnummer = Opplysning(
@@ -436,6 +435,7 @@ object InnsendtSoeknadFixtures {
                     spoersmaal = null
                 ),
                 naeringsInntekt = null,
+                militaertjeneste = null
             ),
             barn = listOf()
 

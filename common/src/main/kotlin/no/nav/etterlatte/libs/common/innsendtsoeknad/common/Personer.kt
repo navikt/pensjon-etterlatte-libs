@@ -31,6 +31,7 @@ import no.nav.etterlatte.libs.common.person.Foedselsnummer
 )
 @JsonSubTypes(
     JsonSubTypes.Type(value = Gjenlevende::class, name = "GJENLEVENDE"),
+    JsonSubTypes.Type(value = GjenlevendeOMS::class, name = "GJENLEVENDE_OMS"),
     JsonSubTypes.Type(value = GjenlevendeForelder::class, name = "GJENLEVENDE_FORELDER"),
     JsonSubTypes.Type(value = Avdoed::class, name = "AVDOED"),
     JsonSubTypes.Type(value = Samboer::class, name = "SAMBOER"),
@@ -49,6 +50,7 @@ interface Person {
 enum class PersonType {
     INNSENDER,
     GJENLEVENDE,
+    GJENLEVENDE_OMS,
     GJENLEVENDE_FORELDER,
     AVDOED,
     SAMBOER,
@@ -109,7 +111,7 @@ data class GjenlevendeOMS(
     val forholdTilAvdoede: ForholdTilAvdoedeOMS,
     val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>
 ) : Person {
-    override val type = PersonType.GJENLEVENDE
+    override val type = PersonType.GJENLEVENDE_OMS
 }
 
 data class Forelder(
@@ -136,22 +138,6 @@ data class Barn(
     override val type = PersonType.BARN
 }
 
-data class BarnOMS(
-    override val fornavn: Opplysning<String>,
-    override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>,
-
-    val statsborgerskap: Opplysning<String>,
-    val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
-    val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>,
-    val foreldre: List<Forelder>,
-    val ukjentForelder: Opplysning<String>?,
-    val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
-    val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
-) : Person {
-    override val type = PersonType.BARN
-}
-
 data class Avdoed(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
@@ -165,21 +151,6 @@ data class Avdoed(
     // Næringsinntekt og militærtjeneste er kun relevant dersom begge foreldrene er døde.
     val naeringsInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Naeringsinntekt?>?,
     val militaertjeneste: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<AarstallForMilitaerTjeneste>?>?
-) : Person {
-    override val type = PersonType.AVDOED
-}
-
-data class AvdoedOMS(
-    override val fornavn: Opplysning<String>,
-    override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>,
-
-    val datoForDoedsfallet: Opplysning<DatoSvar>,
-    val statsborgerskap: Opplysning<FritekstSvar>,
-    val utenlandsopphold: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, List<Utenlandsopphold>>,
-    val doedsaarsakSkyldesYrkesskadeEllerYrkessykdom: Opplysning<EnumSvar<JaNeiVetIkke>>,
-
-    val naeringsInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Naeringsinntekt?>?,
 ) : Person {
     override val type = PersonType.AVDOED
 }

@@ -10,6 +10,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.Barnepensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.InnsendtSoeknad
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadRequest
 import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
+import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevendepensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad.Omstillingsstoenad
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -50,5 +51,21 @@ internal class InnsendtSoeknadTest {
 
         val soeknad = mapper.readValue<InnsendtSoeknad>(json)
         assertTrue(soeknad is Barnepensjon)
+    }
+
+    @Test
+    fun `Deserialisering av omstillingsstoenad`() {
+        val json = javaClass.getResource("/soeknad/omstillingsstoenad.json")!!.readText()
+
+        val soeknad = mapper.readValue<InnsendtSoeknad>(json)
+        assertTrue(soeknad is Omstillingsstoenad)
+    }
+
+    @Test
+    fun `Deserialisering av gjenlevendepensjon`() {
+        val json = javaClass.getResource("/soeknad/gjenlevendepensjon.json")!!.readText()
+
+        val soeknad = mapper.readValue<InnsendtSoeknad>(json)
+        assertTrue(soeknad is Gjenlevendepensjon)
     }
 }
