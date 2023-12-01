@@ -58,7 +58,7 @@ enum class StudieformType { HELTID, DELTID }
 
 enum class StillingType { FAST, MIDLERTIDIG, SESONGARBEID, TILKALLINGSVIKAR }
 enum class OmsorgspersonType { GJENLEVENDE, VERGE, ANNET }
-enum class SivilstatusType { ENSLIG, EKTESKAP, SAMBOERSKAP }
+enum class SivilstatusType { ENKE, ENSLIG, EKTESKAP, SAMBOERSKAP }
 
 enum class EndringAvInntektGrunnType {
     OEKT_STILLINGSPROSENT,
@@ -269,9 +269,9 @@ data class InntektOgPensjon(
 )
 
 data class Loennsinntekt(
-    val norgeEllerUtland: Opplysning<EnumSvar<NorgeEllerUtlandType>>,
-    val norge: InntektSamlet,
-    val utland: InntektSamlet,
+    val norgeEllerUtland: Opplysning<List<EnumSvar<NorgeEllerUtlandType>>>,
+    val norge: InntektSamlet?,
+    val utland: InntektSamlet?,
     val endringAvInntekt: EndringAvInntekt
 )
 
@@ -287,7 +287,7 @@ data class TilOgEtterDoedsfall(
 data class EndringAvInntekt(
     val fremtidigEndringAvInntekt: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val grunn: Opplysning<EnumSvar<EndringAvInntektGrunnType>>?,
-    val annenGrunn: Opplysning<FritekstSvar>
+    val annenGrunn: Opplysning<FritekstSvar>?
 )
 
 data class PensjonEllerUfoere(
