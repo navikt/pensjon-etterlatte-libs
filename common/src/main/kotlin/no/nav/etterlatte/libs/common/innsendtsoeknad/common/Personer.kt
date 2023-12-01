@@ -6,6 +6,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.AarstallForMilitaerTjeneste
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AndreYtelser
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AnnenUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanning
+import no.nav.etterlatte.libs.common.innsendtsoeknad.ArbeidOgUtdanningOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.ForholdTilAvdoede
 import no.nav.etterlatte.libs.common.innsendtsoeknad.HoeyesteUtdanning
 import no.nav.etterlatte.libs.common.innsendtsoeknad.InntektOgPensjon
@@ -14,6 +15,7 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.Naeringsinntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OmsorgspersonType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtland
 import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtlandInformasjon
+import no.nav.etterlatte.libs.common.innsendtsoeknad.OppholdUtlandOMS
 import no.nav.etterlatte.libs.common.innsendtsoeknad.SamboerInntekt
 import no.nav.etterlatte.libs.common.innsendtsoeknad.SivilstatusType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Utenlandsadresse
@@ -78,14 +80,34 @@ data class Gjenlevende(
     val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
     val arbeidOgUtdanning: ArbeidOgUtdanning?,
     val fullfoertUtdanning: BetingetOpplysning<EnumSvar<HoeyesteUtdanning>, Opplysning<AnnenUtdanning>?>?,
-    val fullfoerteUtdanninger: Opplysning<List<EnumSvar<HoeyesteUtdanning>>>?,
     val andreYtelser: AndreYtelser?,
     val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val forholdTilAvdoede: ForholdTilAvdoede,
     val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+) : Person {
+    override val type = PersonType.GJENLEVENDE
+}
 
-    // OMS
-    val inntektOgPensjon: InntektOgPensjon? = null
+data class GjenlevendeOMS(
+    override val fornavn: Opplysning<String>,
+    override val etternavn: Opplysning<String>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>,
+
+    val statsborgerskap: Opplysning<String>,
+    val sivilstatus: Opplysning<String>,
+    val adresse: Opplysning<String>?,
+    val bostedsAdresse: Opplysning<FritekstSvar>?,
+    val kontaktinfo: Kontaktinfo,
+    val flyktning: Opplysning<EnumSvar<JaNeiVetIkke>>?,
+
+    val oppholdUtland: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandOMS?>,
+    val nySivilstatus: BetingetOpplysning<EnumSvar<SivilstatusType>, Samboer?>,
+    val arbeidOgUtdanning: ArbeidOgUtdanningOMS,
+    val fullfoertUtdanning: Opplysning<List<EnumSvar<HoeyesteUtdanning>>>?,
+    val inntektOgPensjon: InntektOgPensjon,
+    val uregistrertEllerVenterBarn: Opplysning<EnumSvar<JaNeiVetIkke>>,
+    val forholdTilAvdoede: ForholdTilAvdoede,
+    val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>
 ) : Person {
     override val type = PersonType.GJENLEVENDE
 }
@@ -107,7 +129,22 @@ data class Barn(
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
     val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>? = null,
     val foreldre: List<Forelder>,
-    val ukjentForelder: Opplysning<String>? = null,
+    val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
+    val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
+) : Person {
+    override val type = PersonType.BARN
+}
+
+data class BarnOMS(
+    override val fornavn: Opplysning<String>,
+    override val etternavn: Opplysning<String>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>,
+
+    val statsborgerskap: Opplysning<String>,
+    val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
+    val bosattNorge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, OppholdUtlandInformasjon?>,
+    val foreldre: List<Forelder>,
+    val ukjentForelder: Opplysning<String>?,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {
@@ -127,6 +164,21 @@ data class Avdoed(
     // Næringsinntekt og militærtjeneste er kun relevant dersom begge foreldrene er døde.
     val naeringsInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Naeringsinntekt?>?,
     val militaertjeneste: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<AarstallForMilitaerTjeneste>?>?
+) : Person {
+    override val type = PersonType.AVDOED
+}
+
+data class AvdoedOMS(
+    override val fornavn: Opplysning<String>,
+    override val etternavn: Opplysning<String>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>,
+
+    val datoForDoedsfallet: Opplysning<DatoSvar>,
+    val statsborgerskap: Opplysning<FritekstSvar>,
+    val utenlandsopphold: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, List<Utenlandsopphold>>,
+    val doedsaarsakSkyldesYrkesskadeEllerYrkessykdom: Opplysning<EnumSvar<JaNeiVetIkke>>,
+
+    val naeringsInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Naeringsinntekt?>?,
 ) : Person {
     override val type = PersonType.AVDOED
 }

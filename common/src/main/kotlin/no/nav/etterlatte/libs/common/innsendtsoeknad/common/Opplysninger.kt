@@ -40,6 +40,8 @@ enum class InntektType { ARBEIDSINNTEKT, PENSJON, KAPITALINNTEKT, ANDRE_YTELSER 
 enum class ForholdTilAvdoedeType { GIFT, SEPARERT, SAMBOER, SKILT, TIDLIGERE_SAMBOER }
 enum class OppholdUtlandType { BODD, ARBEIDET }
 enum class JobbStatusType { ARBEIDSTAKER, SELVSTENDIG, UNDER_UTDANNING, ARBEIDSSOEKER, INGEN }
+
+enum class JobbStatusTypeOMS { ARBEIDSTAKER, SELVSTENDIG, ETABLERER, TILBUD, UNDER_UTDANNING, ARBEIDSSOEKER, INGEN }
 enum class IngenJobb {
     HJEMMEARBEIDENDE,
     OMSORG_BARN,
@@ -103,6 +105,8 @@ enum class SoekbareYtelserAndreType {
     ALDERSPENSJON
 }
 
+enum class NorgeEllerUtlandType { NORGE, UTLAND }
+
 data class SamboerInntekt(
     val inntektstype: Opplysning<List<EnumSvar<InntektType>>>,
     val samletBruttoinntektPrAar: Opplysning<FritekstSvar>,
@@ -117,9 +121,7 @@ data class ForholdTilAvdoede(
     val fellesBarn: Opplysning<EnumSvar<JaNeiVetIkke>>?,
     val samboereMedFellesBarnFoerGiftemaal: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
     val tidligereGift: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
-    val omsorgForBarn: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
-    val mottokBidrag: Opplysning<EnumSvar<JaNeiVetIkke>>? = null, // Finner ikke igjen
-    val mottokEktefelleBidrag: Opplysning<EnumSvar<JaNeiVetIkke>>? = null, // Finner ikke igjen?
+    val mottokBidrag: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<FritekstSvar>?>? = null,
 )
 
 data class Utenlandsopphold(
@@ -143,36 +145,36 @@ data class ArbeidOgUtdanning(
     val arbeidsforhold: Opplysning<List<Arbeidstaker>>?,
     val utdanning: Opplysning<Utdanning>?,
     val annet: Opplysning<EnumSvar<IngenJobb>>?,
-
-
-    // GJENLEVENDE
     val selvstendig: Opplysning<List<SelvstendigNaeringsdrivende>>?,
+    val arbeidssoeker: Opplysning<Arbeidssoeker>?,
+    val annenSituasjon: Opplysning<AnnenSituasjon>?,
+)
+
+data class ArbeidOgUtdanningOMS(
+    val dinSituasjon: Opplysning<List<EnumSvar<JobbStatusTypeOMS>>>,
+    val arbeidsforhold: Opplysning<List<ArbeidstakerOMS>>?,
+    val selvstendig: Opplysning<List<SelvstendigNaeringsdrivendeOMS>>?,
     val etablererVirksomhet: Opplysning<EtablererVirksomhet>?,
     val tilbud: Opplysning<TilbudOmJobb>?,
     val arbeidssoeker: Opplysning<Arbeidssoeker>?,
+    val utdanning: Opplysning<UtdanningOMS>?,
     val annenSituasjon: Opplysning<AnnenSituasjon>?,
-
-
-    // OMS
-    val selvstendigAS: Opplysning<List<SelvstendigNaeringsdrivende>>?,
-    val selvstendigENK: Opplysning<List<SelvstendigNaeringsdrivende>>?,
-
 )
 
 data class Utdanning(
     val startDato: Opplysning<DatoSvar>,
     val sluttDato: Opplysning<DatoSvar>,
-
-    // GJENLEVENDE
     val navn: Opplysning<FritekstSvar>?,
+)
 
-    // OMS
-    val studiested: Opplysning<FritekstSvar>?, // Optional skal fjernes
-    val studie: Opplysning<FritekstSvar>?, // Optional skal fjernes
-    val studieform: Opplysning<EnumSvar<StudieformType>>?, // Optional skal fjernes
+data class UtdanningOMS(
+    val startDato: Opplysning<DatoSvar>,
+    val sluttDato: Opplysning<DatoSvar>,
+    val studiested: Opplysning<FritekstSvar>,
+    val studie: Opplysning<FritekstSvar>,
+    val studieform: Opplysning<EnumSvar<StudieformType>>,
     val studieprosent: Opplysning<FritekstSvar>?,
-    val godkjentUtdanning: Opplysning<EnumSvar<JaNeiVetIkke>>? // Optional skal fjernes
-
+    val godkjentUtdanning: Opplysning<EnumSvar<JaNeiVetIkke>>
 )
 
 typealias AnnenUtdanning = FritekstSvar
@@ -192,29 +194,31 @@ typealias EndretInntektBegrunnelse = FritekstSvar
 data class SelvstendigNaeringsdrivende(
     val firmanavn: Opplysning<FritekstSvar>,
     val orgnr: Opplysning<FritekstSvar>,
-
-    // GJENLEVENDE
     val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>?,
+)
 
-    // OMS
-    val endretArbeidssituasjon: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>?>?, // Optional skal fjernes
-    val arbeidsmengde: Opplysning<FritekstSvar>?  // Optional skal fjernes
+data class SelvstendigNaeringsdrivendeOMS(
+    val firmanavn: Opplysning<FritekstSvar>,
+    val orgnr: Opplysning<FritekstSvar>,
+    val arbeidsmengde: Opplysning<FritekstSvar>,
+    val endretArbeidssituasjon: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>?>
 )
 
 data class Arbeidstaker(
     val arbeidsgiver: Opplysning<FritekstSvar>,
     val ansettelsesforhold: Opplysning<EnumSvar<StillingType>>,
-
-    // OMS
-    val arbeidsmengde: Opplysning<FritekstSvar>?, // Optional skal fjernes
-    val harSluttDato: Opplysning<EnumSvar<JaNeiVetIkke>>?,
-    val sluttDato: Opplysning<DatoSvar>?,
-    val endretArbeidssituasjon: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>?>?, // Optional skal fjernes
-    val sagtOppEllerRedusert: Opplysning<EnumSvar<SagtOppEllerRedusertType>>?, // Optional skal fjernes
-
-    // Gjenlevende
     val stillingsprosent: Opplysning<FritekstSvar>?,
     val endretInntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>>?
+)
+
+data class ArbeidstakerOMS(
+    val arbeidsgiver: Opplysning<FritekstSvar>,
+    val ansettelsesforhold: Opplysning<EnumSvar<StillingType>>,
+    val arbeidsmengde: Opplysning<FritekstSvar>,
+    val harSluttDato: Opplysning<EnumSvar<JaNeiVetIkke>>?,
+    val sluttDato: Opplysning<DatoSvar>?,
+    val endretArbeidssituasjon: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>?>,
+    // val sagtOppEllerRedusert: Opplysning<EnumSvar<SagtOppEllerRedusertType>>?, // Optional skal fjernes
 )
 
 data class EtablererVirksomhet(
@@ -253,11 +257,16 @@ data class InntektOgPensjon(
 )
 
 data class Loennsinntekt(
-    val arbeidsinntektAaretFoer: Opplysning<FritekstSvar>,
-    val arbeidsinntektIAar: TilOgEtterDoedsfall,
+    val norgeEllerUtland: Opplysning<EnumSvar<NorgeEllerUtlandType>>,
+    val norge: InntektSamlet,
+    val utland: InntektSamlet,
     val endringAvInntekt: EndringAvInntekt
 )
 
+data class InntektSamlet(
+    val arbeidsinntektAaretFoer: Opplysning<FritekstSvar>,
+    val arbeidsinntektIAar: TilOgEtterDoedsfall,
+)
 data class TilOgEtterDoedsfall(
     val tilDoedsfall: Opplysning<FritekstSvar>,
     val etterDoedsfall: Opplysning<FritekstSvar>
@@ -340,7 +349,11 @@ data class PensjonUtland(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class OppholdUtland(
-    val land: Opplysning<FritekstSvar>? = null, // Kan ikke fjernes før gjenlevendepensjon sin søknad er fjernet
+    val land: Opplysning<FritekstSvar>?
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class OppholdUtlandOMS(
     val bosattLand: Opplysning<FritekstSvar>? = null,
     val oppholderSegIUtlandet: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
     val oppholdsland: Opplysning<FritekstSvar>? = null,
