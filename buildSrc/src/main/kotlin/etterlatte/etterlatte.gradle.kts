@@ -11,3 +11,12 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+        }
+    }
+}
