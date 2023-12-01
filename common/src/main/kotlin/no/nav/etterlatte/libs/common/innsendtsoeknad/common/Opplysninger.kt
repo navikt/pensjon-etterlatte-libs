@@ -230,7 +230,7 @@ data class ArbeidstakerOMS(
     val harSluttDato: Opplysning<EnumSvar<JaNeiVetIkke>>?,
     val sluttDato: Opplysning<DatoSvar>?,
     val endretArbeidssituasjon: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<EndretInntektBegrunnelse>?>,
-    // val sagtOppEllerRedusert: Opplysning<EnumSvar<SagtOppEllerRedusertType>>?, // Optional skal fjernes
+    val sagtOppEllerRedusert: Opplysning<EnumSvar<SagtOppEllerRedusertType>>? = null, // Venter på avklaring om den skal fjernes
 )
 
 data class EtablererVirksomhet(
