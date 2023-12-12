@@ -281,7 +281,7 @@ data class InntektSamlet(
 )
 data class TilOgEtterDoedsfall(
     val tilDoedsfall: Opplysning<FritekstSvar>,
-    val etterDoedsfall: Opplysning<FritekstSvar>
+    val etterDoedsfall: Opplysning<FritekstSvar>?
 )
 
 data class EndringAvInntekt(
