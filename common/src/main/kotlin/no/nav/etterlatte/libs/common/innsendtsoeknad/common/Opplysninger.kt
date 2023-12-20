@@ -277,11 +277,19 @@ data class Loennsinntekt(
 
 data class InntektSamlet(
     val arbeidsinntektAaretFoer: Opplysning<FritekstSvar>,
+    val inntektEtterDoedsfall: Opplysning<FritekstSvar>?,
     val arbeidsinntektIAar: TilOgEtterDoedsfall,
+    val sesongbasertNaeringsinntekt: SesongbasertNaeringsinntekt?
 )
 data class TilOgEtterDoedsfall(
     val tilDoedsfall: Opplysning<FritekstSvar>,
-    val etterDoedsfall: Opplysning<FritekstSvar>?
+    val etterDoedsfall: Opplysning<FritekstSvar>?,
+    val aarsinntekt: Opplysning<FritekstSvar>?
+)
+
+data class SesongbasertNaeringsinntekt(
+    val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
+    val beskrivelse: Opplysning<FritekstSvar>?
 )
 
 data class EndringAvInntekt(
