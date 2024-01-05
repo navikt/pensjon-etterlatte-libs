@@ -282,7 +282,7 @@ data class InntektSamlet(
     val sesongbasertNaeringsinntekt: SesongbasertNaeringsinntekt?
 )
 data class TilOgEtterDoedsfall(
-    val tilDoedsfall: Opplysning<FritekstSvar>,
+    val tilDoedsfall: Opplysning<FritekstSvar>?,
     val etterDoedsfall: Opplysning<FritekstSvar>?,
     val aarsinntekt: Opplysning<FritekstSvar>?
 )
