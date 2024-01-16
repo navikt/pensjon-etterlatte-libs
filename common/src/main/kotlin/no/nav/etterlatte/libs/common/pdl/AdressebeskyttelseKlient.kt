@@ -12,7 +12,7 @@ import no.nav.etterlatte.libs.common.person.Foedselsnummer
 import org.slf4j.LoggerFactory
 
 interface Pdl {
-    suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>): AdressebeskyttelseResponse
+    suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, behandlingsnummer: String): AdressebeskyttelseResponse
 }
 
 class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUrl: String) : Pdl {
@@ -26,13 +26,16 @@ class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUr
      *
      * @return [AdressebeskyttelseResponse]: Responsobjekt fra PDL.
      */
-    override suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>): AdressebeskyttelseResponse {
+    override suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, behandlingsnummer: String):
+            AdressebeskyttelseResponse {
+
         val query = hentQuery()
 
         val request = GraphqlRequest(query, Variables(identer = fnrListe.map { it.value }))
 
         val response = client.post(apiUrl) {
-            header("Tema", "PEN")
+            header(HEADER_TEMA, HEADER_TEMA_VALUE)
+            header(HEADER_BEHANDLINGSNUMMER, behandlingsnummer)
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.Json)
             setBody(request)
@@ -44,6 +47,12 @@ class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUr
         }
 
         return response
+    }
+
+    companion object {
+        const val HEADER_BEHANDLINGSNUMMER = "behandlingsnummer"
+        const val HEADER_TEMA = "Tema"
+        const val HEADER_TEMA_VALUE = "PEN"
     }
 
     private fun hentQuery(): String = javaClass.getResource("/pdl/hentAdressebeskyttelse.graphql")!!
