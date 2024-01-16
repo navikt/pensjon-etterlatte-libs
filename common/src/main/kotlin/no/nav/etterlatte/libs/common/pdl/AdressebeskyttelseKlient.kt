@@ -8,11 +8,13 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
+import no.nav.etterlatte.libs.common.innsendtsoeknad.common.finnBehandlingsnummerFromSaktype
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
 import org.slf4j.LoggerFactory
 
 interface Pdl {
-    suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, behandlingsnummer: String): AdressebeskyttelseResponse
+    suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, saktype: SoeknadType): AdressebeskyttelseResponse
 }
 
 class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUrl: String) : Pdl {
@@ -26,12 +28,14 @@ class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUr
      *
      * @return [AdressebeskyttelseResponse]: Responsobjekt fra PDL.
      */
-    override suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, behandlingsnummer: String):
+    override suspend fun finnAdressebeskyttelseForFnr(fnrListe: List<Foedselsnummer>, saktype: SoeknadType):
             AdressebeskyttelseResponse {
 
         val query = hentQuery()
 
         val request = GraphqlRequest(query, Variables(identer = fnrListe.map { it.value }))
+
+        val behandlingsnummer = finnBehandlingsnummerFromSaktype(saktype)
 
         val response = client.post(apiUrl) {
             header(HEADER_TEMA, HEADER_TEMA_VALUE)
