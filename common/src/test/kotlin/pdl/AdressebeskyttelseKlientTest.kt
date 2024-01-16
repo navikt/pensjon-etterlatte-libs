@@ -11,6 +11,7 @@ import io.ktor.serialization.jackson.jackson
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import no.nav.etterlatte.libs.common.innsendtsoeknad.common.SoeknadType
 import no.nav.etterlatte.libs.common.pdl.Gradering
 import no.nav.etterlatte.libs.common.pdl.AdressebeskyttelseKlient
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
@@ -43,7 +44,7 @@ internal class AdressebeskyttelseKlientTest {
         }
 
         runBlocking {
-            AdressebeskyttelseKlient(httpClient, "https://pdl.no/").finnAdressebeskyttelseForFnr(listOf(fnr)).also {
+            AdressebeskyttelseKlient(httpClient, "https://pdl.no/").finnAdressebeskyttelseForFnr(listOf(fnr), SoeknadType.BARNEPENSJON).also {
                 assertEquals(
                     Gradering.FORTROLIG,
                     it.data?.hentPersonBolk?.get(0)?.person?.adressebeskyttelse?.get(0)?.gradering
