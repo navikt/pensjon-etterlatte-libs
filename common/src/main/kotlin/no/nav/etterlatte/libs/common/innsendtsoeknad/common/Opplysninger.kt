@@ -276,7 +276,7 @@ data class Loennsinntekt(
 )
 
 data class InntektSamlet(
-    val arbeidsinntektAaretFoer: Opplysning<FritekstSvar>,
+    val arbeidsinntektAaretFoer: Opplysning<FritekstSvar>?,
     val inntektEtterDoedsfall: Opplysning<FritekstSvar>?,
     val arbeidsinntektIAar: TilOgEtterDoedsfall,
     val sesongbasertNaeringsinntekt: SesongbasertNaeringsinntekt?
