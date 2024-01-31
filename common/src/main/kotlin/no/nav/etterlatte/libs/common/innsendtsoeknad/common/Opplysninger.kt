@@ -280,7 +280,7 @@ data class InntektSamlet(
     val inntektIFjor: TilDoedsfallOgAarsinntekt,
     val inntektIAar: TilDoedsfallOgAarsinntekt,
     val inntektNesteAar: Aarsinntekt?,
-    val sesongbasertNaeringsinntekt: SesongbasertNaeringsinntekt?
+    val jevntOpptjentNaeringsinntekt: JevntOpptjentNaeringsinntekt?
 )
 
 data class TilDoedsfallOgAarsinntekt(
@@ -292,7 +292,7 @@ data class Aarsinntekt(
     val aarsinntekt: Opplysning<FritekstSvar>?
 )
 
-data class SesongbasertNaeringsinntekt(
+data class JevntOpptjentNaeringsinntekt(
     val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val beskrivelse: Opplysning<FritekstSvar>?
 )
