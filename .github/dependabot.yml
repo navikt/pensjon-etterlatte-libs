@@ -10,11 +10,9 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
     groups:
-      test:
+      alt:
         patterns:
-          - "org.junit.jupiter*"
-          - "io.mockk*"
-          - "io.kotest*"
+          - "*"
 
 
   # ==============
