@@ -278,7 +278,7 @@ data class Loennsinntekt(
 data class InntektSamlet(
     val inntektAaretFoerDoedsfall: Opplysning<FritekstSvar>?,
     val inntektIFjor: TilDoedsfallOgAarsinntekt?,
-    val inntektIAar: TilDoedsfallOgAarsinntekt,
+    val inntektIAar: TilDoedsfallOgAarsinntekt?,
     val inntektNesteAar: Aarsinntekt?,
     val jevntOpptjentNaeringsinntekt: JevntOpptjentNaeringsinntekt?
 )
