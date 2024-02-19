@@ -340,7 +340,7 @@ data class InntektViaYtelserFraNAV(
     val ytelser: Opplysning<List<EnumSvar<InntektEllerUtbetalingType>>>
 )
 data class IngenInntekt(
-    val svar: Opplysning<JaNeiVetIkke>,
+    val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val beloep: Opplysning<FritekstSvar>?,
     val beskrivelse: Opplysning<FritekstSvar>?,
 )
