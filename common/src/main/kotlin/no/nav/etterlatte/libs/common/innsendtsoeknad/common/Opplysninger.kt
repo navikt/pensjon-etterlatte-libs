@@ -81,6 +81,20 @@ enum class PensjonsYtelseType {
     ALDERSPENSJON
 }
 
+enum class InntektEllerUtbetalingType {
+    DAGSPENGER,
+    SYKEPENGER,
+    PLEIEPENGER,
+    SVANGERSKAPSPENGER,
+    FORELDREPENGER,
+    ARBEIDSAVKLARINGSPENGER,
+    KVALIFISERINGSSTOENAD,
+    KOMMUNAL_OMSORGSSTOENAD,
+    FOSTERHJEMSGODTGJOERING,
+    OMSORGSPENGER,
+    OPPLAERINGSPENGER,
+}
+
 enum class SoekbareYtelserNAVType {
     DAGSPENGER,
     SYKEPENGER,
@@ -263,7 +277,8 @@ data class InntektOgPensjon(
     val loennsinntekt: Opplysning<Loennsinntekt>?,
     val naeringsinntekt: Opplysning<Loennsinntekt>?,
     val pensjonEllerUfoere: PensjonEllerUfoere?,
-    val annenInntekt: AnnenInntekt?,
+    val inntektViaYtelserFraNAV: InntektViaYtelserFraNAV?,
+    val ingenInntekt: IngenInntekt?,
     val ytelserNAV: YtelserNav,
     val ytelserAndre: YtelserAndre,
 )
@@ -321,9 +336,13 @@ data class Utland(
     val beloepMedValuta: Opplysning<FritekstSvar>?
 )
 
-data class AnnenInntekt(
-    val annenInntektEllerUtbetaling: Opplysning<Any>,
+data class InntektViaYtelserFraNAV(
+    val ytelser: Opplysning<List<EnumSvar<InntektEllerUtbetalingType>>>
+)
+data class IngenInntekt(
+    val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val beloep: Opplysning<FritekstSvar>?,
+    val beskrivelse: Opplysning<FritekstSvar>?,
 )
 
 data class YtelserNav(

@@ -455,8 +455,8 @@
           }
         }
       },
-      "annenInntekt": {
-        "annenInntektEllerUtbetaling": {
+      "inntektViaYtelserFraNAV": {
+        "ytelser": {
           "spoersmaal": "Hvilke andre inntekter eller utbetalinger har du?",
           "svar": [
             {
