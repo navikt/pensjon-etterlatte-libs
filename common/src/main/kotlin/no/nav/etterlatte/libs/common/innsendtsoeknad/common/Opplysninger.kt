@@ -71,7 +71,7 @@ enum class EndringAvInntektGrunnType {
     ANNEN_GRUNN
 }
 
-enum class PensjonEllerTrygdType { TJENESTEPENSJONSORDNING, UFOEREPENSJON_FRA_NAV, ALDERSPENSJON_FRA_NAV }
+enum class PensjonEllerTrygdType { TJENESTEPENSJONSORDNING, UFOEREPENSJON_FRA_NAV, ALDERSPENSJON_FRA_NAV, PENSJON_FRA_UTLANDET }
 
 enum class PensjonsYtelseType {
     AVTALEFESTET_PENSJON_OFFENTLIG,
@@ -321,7 +321,7 @@ data class EndringAvInntekt(
 data class PensjonEllerUfoere(
     val pensjonstype: Opplysning<List<EnumSvar<PensjonEllerTrygdType>>>,
     val tjenestepensjonsordning: Tjenestepensjonsordning?,
-    val utland: Utland
+    val utland: Utland?
 )
 
 data class Tjenestepensjonsordning(
@@ -330,7 +330,6 @@ data class Tjenestepensjonsordning(
 )
 
 data class Utland(
-    val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val type: Opplysning<FritekstSvar>?,
     val land: Opplysning<FritekstSvar>?,
     val beloepMedValuta: Opplysning<FritekstSvar>?
