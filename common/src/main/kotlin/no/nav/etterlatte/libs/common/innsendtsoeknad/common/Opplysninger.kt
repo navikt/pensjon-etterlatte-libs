@@ -200,7 +200,8 @@ data class UtdanningOMS(
     val studie: Opplysning<FritekstSvar>,
     val studieform: Opplysning<EnumSvar<StudieformType>>,
     val studieprosent: Opplysning<FritekstSvar>?,
-    val godkjentUtdanning: Opplysning<EnumSvar<JaNeiVetIkke>>
+    val godkjentUtdanning: Opplysning<EnumSvar<JaNeiVetIkke>>,
+    val aktivitetsplan: Opplysning<EnumSvar<JaNeiVetIkke>>?
 )
 
 typealias AnnenUtdanning = FritekstSvar
@@ -260,7 +261,8 @@ data class TilbudOmJobb(
     val ansettelsesforhold: Opplysning<EnumSvar<StillingType>>,
     val arbeidsmengde: Opplysning<FritekstSvar>,
     val harSluttdato: Opplysning<EnumSvar<JaNeiVetIkke>>?,
-    val sluttdato: Opplysning<DatoSvar>?
+    val sluttdato: Opplysning<DatoSvar>?,
+    val aktivitetsplan: Opplysning<EnumSvar<JaNeiVetIkke>>?
 )
 
 data class Arbeidssoeker(
@@ -336,7 +338,8 @@ data class Utland(
 )
 
 data class InntektViaYtelserFraNAV(
-    val ytelser: Opplysning<List<EnumSvar<InntektEllerUtbetalingType>>>
+    val ytelser: Opplysning<List<EnumSvar<InntektEllerUtbetalingType>>>,
+    val aktivitetsplan: Opplysning<EnumSvar<JaNeiVetIkke>>?
 )
 data class IngenInntekt(
     val svar: Opplysning<EnumSvar<JaNeiVetIkke>>,
