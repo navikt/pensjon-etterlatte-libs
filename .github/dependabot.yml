@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     open-pull-requests-limit: 10
     groups:
       jvm:
@@ -15,7 +15,11 @@ updates:
           - "jvm"
       alt:
         patterns:
-          - "*"
+          - "ca*"
+          - "com*"
+          - "io*"
+          - "no*"
+          - "org*"
 
 
   # ==============
