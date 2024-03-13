@@ -15,7 +15,11 @@ updates:
           - "jvm"
       alt:
         patterns:
-          - "*"
+          - "ca*"
+          - "com*"
+          - "io*"
+          - "no*"
+          - "org*"
 
 
   # ==============
