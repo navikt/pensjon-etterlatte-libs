@@ -10,6 +10,9 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
     groups:
+      jvm:
+        patterns:
+          - "jvm"
       alt:
         patterns:
           - "*"
