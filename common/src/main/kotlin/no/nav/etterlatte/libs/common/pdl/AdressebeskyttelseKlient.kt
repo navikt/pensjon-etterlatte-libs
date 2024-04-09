@@ -35,7 +35,7 @@ class AdressebeskyttelseKlient(private val client: HttpClient, private val apiUr
 
         val request = GraphqlRequest(query, Variables(identer = fnrListe.map { it.value }))
 
-        val behandlingsnummer = finnBehandlingsnummerFromSaktype(saktype)
+        val behandlingsnummer = finnBehandlingsnummerFromSaktype(saktype).behandlingsnummer
 
         val response = client.post(apiUrl) {
             header(HEADER_TEMA, HEADER_TEMA_VALUE)
