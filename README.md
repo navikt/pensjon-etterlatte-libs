@@ -3,11 +3,9 @@
 Felles biblioteker for Team Etterlatte.
 
 
-# Apper
+# Libs
 
 - [common](common)
-- [common-test](common-test)
-- [ktor-client-auth](ktor-client-auth)
 
 
 # Kom i gang
