@@ -12,7 +12,7 @@ dependencies {
     api(libs.jackson.modulekotlin)
 
     implementation(libs.ktor2.clientcore)
-    implementation(libs.ktor2.clientloggingjvm)
+    implementation(libs.ktor2.clientlogging)
     implementation(libs.ktor2.clientauth)
     implementation(libs.ktor2.jackson)
     implementation(libs.ktor2.clientcontentnegotiation)
