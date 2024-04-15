@@ -7,7 +7,6 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.BankkontoType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Spraak
 import no.nav.etterlatte.libs.common.innsendtsoeknad.UtbetalingsInformasjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon.Barnepensjon
-import no.nav.etterlatte.libs.common.innsendtsoeknad.gjenlevendepensjon.Gjenlevendepensjon
 import no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad.Omstillingsstoenad
 import java.time.LocalDateTime
 
@@ -17,7 +16,6 @@ import java.time.LocalDateTime
     property = "type"
 )
 @JsonSubTypes(
-    JsonSubTypes.Type(value = Gjenlevendepensjon::class, name = "GJENLEVENDEPENSJON"),
     JsonSubTypes.Type(value = Barnepensjon::class, name = "BARNEPENSJON"),
     JsonSubTypes.Type(value = Omstillingsstoenad::class, name = "OMSTILLINGSSTOENAD")
 )
@@ -42,7 +40,7 @@ interface InnsendtSoeknad {
  */
 typealias ImageTag = String
 
-// Kan inneholde både gjenlevendepensjon og barnepensjon søknader.
+// Kan inneholde søknad for både omstillingsstønad og barnepensjon
 data class SoeknadRequest(
     val soeknader: List<InnsendtSoeknad>
 )
