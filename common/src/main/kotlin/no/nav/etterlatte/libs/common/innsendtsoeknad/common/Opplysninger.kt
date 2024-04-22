@@ -271,7 +271,7 @@ data class Arbeidssoeker(
 )
 
 data class AnnenSituasjon(
-    val beskrivelse: Opplysning<EnumSvar<IngenJobb>>,
+    val beskrivelse: Opplysning<List<EnumSvar<IngenJobb>>>,
     val annet: Opplysning<FritekstSvar>?
 )
 
