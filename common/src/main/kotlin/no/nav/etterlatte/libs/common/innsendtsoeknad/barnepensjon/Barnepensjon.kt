@@ -1,6 +1,7 @@
 package no.nav.etterlatte.libs.common.innsendtsoeknad.barnepensjon
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import java.time.LocalDate
 import no.nav.etterlatte.libs.common.innsendtsoeknad.BankkontoType
 import no.nav.etterlatte.libs.common.innsendtsoeknad.Kontaktinfo
 import no.nav.etterlatte.libs.common.innsendtsoeknad.UtbetalingsInformasjon
@@ -32,18 +33,13 @@ data class Barnepensjon(
     override val versjon = "2"
     override val type = SoeknadType.BARNEPENSJON
     override val mottattDato: LocalDateTime = LocalDateTime.now()
-
-    init {
-        requireNotNull(versjon) { "Versjon av søknaden må være satt"}
-        requireNotNull(type)
-        requireNotNull(mottattDato)
-    }
 }
 
 data class GjenlevendeForelder(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
     override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val adresse: Opplysning<String>,
     val statsborgerskap: Opplysning<String>,

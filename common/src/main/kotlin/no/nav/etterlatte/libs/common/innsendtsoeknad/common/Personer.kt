@@ -2,6 +2,7 @@ package no.nav.etterlatte.libs.common.innsendtsoeknad.common
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import java.time.LocalDate
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AarstallForMilitaerTjeneste
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AndreYtelser
 import no.nav.etterlatte.libs.common.innsendtsoeknad.AnnenUtdanning
@@ -44,7 +45,8 @@ interface Person {
     val type: PersonType
     val fornavn: Opplysning<String>
     val etternavn: Opplysning<String>
-    val foedselsnummer: Opplysning<Foedselsnummer>
+    val foedselsnummer: Opplysning<Foedselsnummer>?
+    val foedselsdato: Opplysning<LocalDate>?
 }
 
 enum class PersonType {
@@ -65,12 +67,14 @@ data class Innsender(
     override val foedselsnummer: Opplysning<Foedselsnummer>
 ) : Person {
     override val type: PersonType = PersonType.INNSENDER
+    override val foedselsdato: Opplysning<LocalDate>? = null
 }
 
 data class Gjenlevende(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
     override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val statsborgerskap: Opplysning<String>,
     val sivilstatus: Opplysning<String>,
@@ -94,6 +98,7 @@ data class GjenlevendeOMS(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
     override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val statsborgerskap: Opplysning<String>,
     val sivilstatus: Opplysning<String>,
@@ -117,7 +122,8 @@ data class GjenlevendeOMS(
 data class Forelder(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>
+    override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsdato: Opplysning<LocalDate>? = null
 ) : Person {
     override val type: PersonType = PersonType.FORELDER
 }
@@ -125,7 +131,8 @@ data class Forelder(
 data class Barn(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>? = null,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val statsborgerskap: Opplysning<String>,
     val utenlandsAdresse: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Utenlandsadresse?>?,
@@ -136,12 +143,19 @@ data class Barn(
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?
 ) : Person {
     override val type = PersonType.BARN
+
+    init {
+        check (foedselsdato != null || foedselsnummer != null) {
+            "Kan ikke opprette barn uten verken fødselsnummer eller fødselsdato"
+        }
+    }
 }
 
 data class Avdoed(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>? = null,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val datoForDoedsfallet: Opplysning<DatoSvar>,
     val statsborgerskap: Opplysning<FritekstSvar>,
@@ -153,6 +167,12 @@ data class Avdoed(
     val militaertjeneste: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Opplysning<AarstallForMilitaerTjeneste>?>?
 ) : Person {
     override val type = PersonType.AVDOED
+
+    init {
+        check (foedselsdato != null || foedselsnummer != null) {
+            "Kan ikke opprette avdød uten verken fødselsnummer eller fødselsdato"
+        }
+    }
 }
 
 data class Verge(
@@ -167,6 +187,7 @@ data class Samboer(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
     override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsdato: Opplysning<LocalDate>? = null,
 
     val fellesBarnEllertidligereGift: Opplysning<EnumSvar<JaNeiVetIkke>>,
     val inntekt: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, SamboerInntekt?>?,
