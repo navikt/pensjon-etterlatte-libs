@@ -13,7 +13,9 @@ import java.time.temporal.ChronoUnit
  *
  * @see <a href="https://www.skatteetaten.no/person/folkeregister/fodsel-og-navnevalg/barn-fodt-i-norge/fodselsnummer">Skatteetaten om fødselsnummer</a>
  */
-class Foedselsnummer private constructor(@JsonValue val value: String) {
+class Foedselsnummer private constructor(
+    @JsonValue val value: String,
+) {
     init {
         require(FoedselsnummerValidator.isValid(value))
     }
@@ -28,10 +30,8 @@ class Foedselsnummer private constructor(@JsonValue val value: String) {
                 throw InvalidFoedselsnummer(fnr, e)
             }
 
-        fun isValid(fnr: String?): Boolean =
-            FoedselsnummerValidator.isValid(fnr!!.replace(Regex("[^0-9]"), ""))
+        fun isValid(fnr: String?): Boolean = FoedselsnummerValidator.isValid(fnr!!.replace(Regex("[^0-9]"), ""))
     }
-
 
     /**
      * @return birthdate as [LocalDate]
@@ -64,24 +64,24 @@ class Foedselsnummer private constructor(@JsonValue val value: String) {
      * @return 4 digit year of birth as [Int]
      */
     private fun getYearOfBirth(): Int {
-        val century: String = when (val individnummer = value.slice(6 until 9).toInt()) {
-            in 0..499,
-            in 900..999 -> "19"
-            in 500..999 -> "20"
-            in 500..749 -> "18"
-            else -> {
-                throw IllegalArgumentException("Ingen gyldig årstall funnet for individnummer $individnummer")
+        val century: String =
+            when (val individnummer = value.slice(6 until 9).toInt()) {
+                in 0..499,
+                in 900..999,
+                -> "19"
+                in 500..999 -> "20"
+                in 500..749 -> "18"
+                else -> {
+                    throw IllegalArgumentException("Ingen gyldig årstall funnet for individnummer $individnummer")
+                }
             }
-        }
 
         val year = value.slice(4 until 6)
 
         return "$century$year".toInt()
     }
 
-    fun getAge(): Int {
-        return ChronoUnit.YEARS.between(getBirthDate(), LocalDate.now()).toInt()
-    }
+    fun getAge(): Int = ChronoUnit.YEARS.between(getBirthDate(), LocalDate.now()).toInt()
 
     /**
      * Sjekker om fødselsnummeret er av typen "Hjelpenummer".
@@ -112,4 +112,7 @@ class Foedselsnummer private constructor(@JsonValue val value: String) {
     override fun toString(): String = this.value.replaceRange(6 until 11, "*****")
 }
 
-class InvalidFoedselsnummer(value: String?, cause: Throwable) : Exception("Ugyldig fødselsnummer $value", cause)
+class InvalidFoedselsnummer(
+    value: String?,
+    cause: Throwable,
+) : Exception("Ugyldig fødselsnummer $value", cause)

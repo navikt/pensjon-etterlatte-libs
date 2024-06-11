@@ -5,7 +5,6 @@ import no.nav.etterlatte.libs.common.person.FoedselsnummerValidator.Companion.is
 import org.junit.jupiter.api.Test
 
 internal class FoedselsnummerValidatorTest {
-
     @Test
     fun `Sjekk diverse gyldige test fnr`() {
         isValid("11057523044") shouldBe true
