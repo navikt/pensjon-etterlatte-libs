@@ -12,12 +12,11 @@ class FoedselsnummerValidator {
          * It does not have a BigInteger value of 0.
          * Control digits are valid.
          */
-        fun isValid(value: String): Boolean {
-            return !Regex("(0{11})|([0-9]{6}0{5})").matches(value)
-                    && value.length == 11
-                    && value.toBigIntegerOrNull() != null
-                    && validateControlDigits(value)
-        }
+        fun isValid(value: String): Boolean =
+            !Regex("(0{11})|([0-9]{6}0{5})").matches(value) &&
+                value.length == 11 &&
+                value.toBigIntegerOrNull() != null &&
+                validateControlDigits(value)
 
         /**
          * Validate control digits.
@@ -42,9 +41,14 @@ class FoedselsnummerValidator {
          * Control Digits 2
          *  k2 = 11 - ((5 × d1 + 4 × d2 + 3 × m1 + 2 × m2 + 7 × å1 + 6 × å2 + 5 × i1 + 4 × i2 + 3 × i3 + 2 × k1) mod 11)
          */
-        private fun mod(arr: IntArray, value: String): Int {
-            val sum = arr.withIndex()
-                .sumOf { (i, m) -> m * Character.getNumericValue(value[i]) }
+        private fun mod(
+            arr: IntArray,
+            value: String,
+        ): Int {
+            val sum =
+                arr
+                    .withIndex()
+                    .sumOf { (i, m) -> m * Character.getNumericValue(value[i]) }
 
             val result = 11 - (sum % 11)
             return if (result == 11) 0 else result

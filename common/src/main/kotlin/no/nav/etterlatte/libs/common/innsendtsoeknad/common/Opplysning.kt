@@ -18,16 +18,16 @@ interface Svar {
 }
 
 data class FritekstSvar(
-    override val innhold: String
-): Svar
+    override val innhold: String,
+) : Svar
 
 data class DatoSvar(
-    override val innhold: LocalDate
-): Svar
+    override val innhold: LocalDate,
+) : Svar
 
-data class EnumSvar<E: Enum<E>>(
+data class EnumSvar<E : Enum<E>>(
     val verdi: E,
-    override val innhold: String
-): Svar
+    override val innhold: String,
+) : Svar
 
 enum class JaNeiVetIkke { JA, NEI, VET_IKKE }

@@ -23,7 +23,6 @@ data class Omstillingsstoenad(
     override val innsender: Innsender,
     override val harSamtykket: Opplysning<Boolean>,
     override val utbetalingsInformasjon: BetingetOpplysning<EnumSvar<BankkontoType>, UtbetalingsInformasjon>?,
-
     override val soeker: GjenlevendeOMS,
     val avdoed: Avdoed,
     val barn: List<Barn>,

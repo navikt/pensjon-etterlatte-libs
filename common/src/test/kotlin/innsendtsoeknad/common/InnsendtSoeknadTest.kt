@@ -14,10 +14,11 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.omstillingsstoenad.Omstilli
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
+@Suppress("ktlint:standard:max-line-length")
 internal class InnsendtSoeknadTest {
-
-    private val mapper = jacksonObjectMapper()
-        .registerModule(JavaTimeModule())
+    private val mapper =
+        jacksonObjectMapper()
+            .registerModule(JavaTimeModule())
 
     @Test
     fun `Deserialisering fungerer som forventet`() {
