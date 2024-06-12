@@ -122,10 +122,16 @@ data class GjenlevendeOMS(
 data class Forelder(
     override val fornavn: Opplysning<String>,
     override val etternavn: Opplysning<String>,
-    override val foedselsnummer: Opplysning<Foedselsnummer>,
+    override val foedselsnummer: Opplysning<Foedselsnummer>? = null,
     override val foedselsdato: Opplysning<LocalDate>? = null
 ) : Person {
     override val type: PersonType = PersonType.FORELDER
+
+    init {
+        check (foedselsdato != null || foedselsnummer != null) {
+            "Kan ikke opprette forelder uten verken fødselsnummer eller fødselsdato"
+        }
+    }
 }
 
 data class Barn(
