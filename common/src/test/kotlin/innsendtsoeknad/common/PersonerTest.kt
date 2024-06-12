@@ -17,18 +17,20 @@ import no.nav.etterlatte.libs.common.innsendtsoeknad.common.Verge
 import no.nav.etterlatte.libs.common.person.Foedselsnummer
 import org.junit.jupiter.api.Test
 
+@Suppress("ktlint:standard:max-line-length")
 internal class PersonerTest {
-
-    private val mapper = jacksonObjectMapper()
-        .registerModule(JavaTimeModule())
+    private val mapper =
+        jacksonObjectMapper()
+            .registerModule(JavaTimeModule())
 
     @Test
     fun `Serde av verge fungerer`() {
-        val verge = Verge(
-            Opplysning("Fornavn"),
-            Opplysning("Etternavn"),
-            Opplysning(Foedselsnummer.of("24014021406"))
-        )
+        val verge =
+            Verge(
+                Opplysning("Fornavn"),
+                Opplysning("Etternavn"),
+                Opplysning(Foedselsnummer.of("24014021406")),
+            )
 
         val serialized = mapper.writeValueAsString(verge)
 
@@ -42,9 +44,10 @@ internal class PersonerTest {
 
     @Test
     fun `Serde av verge fungerer med nullable felter`() {
-        val verge = Verge(
-            fornavn = Opplysning("Fornavn"),
-        )
+        val verge =
+            Verge(
+                fornavn = Opplysning("Fornavn"),
+            )
 
         val serialized = mapper.writeValueAsString(verge)
 

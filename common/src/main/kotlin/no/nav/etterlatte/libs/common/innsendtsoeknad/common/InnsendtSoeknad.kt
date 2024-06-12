@@ -13,11 +13,11 @@ import java.time.LocalDateTime
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.EXISTING_PROPERTY,
-    property = "type"
+    property = "type",
 )
 @JsonSubTypes(
     JsonSubTypes.Type(value = Barnepensjon::class, name = "BARNEPENSJON"),
-    JsonSubTypes.Type(value = Omstillingsstoenad::class, name = "OMSTILLINGSSTOENAD")
+    JsonSubTypes.Type(value = Omstillingsstoenad::class, name = "OMSTILLINGSSTOENAD"),
 )
 interface InnsendtSoeknad {
     val versjon: String
@@ -42,5 +42,5 @@ typealias ImageTag = String
 
 // Kan inneholde søknad for både omstillingsstønad og barnepensjon
 data class SoeknadRequest(
-    val soeknader: List<InnsendtSoeknad>
+    val soeknader: List<InnsendtSoeknad>,
 )

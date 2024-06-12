@@ -39,11 +39,12 @@
       "swift": null,
       "skattetrekk": {
         "svar": {
-          "verdi": "NEI",
-          "innhold": "Nei"
-        },
-        "spoersmaal": "Ønsker du at vi legger inn et skattetrekk for barnepensjonen?",
-        "opplysning": null
+          "svar": {
+            "verdi": "NEI",
+            "innhold": "Nei"
+          },
+          "spoersmaal": "Ønsker du at vi legger inn et skattetrekk for barnepensjonen?"
+        }
       }
     }
   },

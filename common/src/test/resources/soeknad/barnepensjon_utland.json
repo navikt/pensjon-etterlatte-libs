@@ -39,15 +39,23 @@
       "swift": null,
       "skattetrekk": {
         "svar": {
-          "verdi": "JA",
-          "innhold": "Ja"
+          "svar": {
+            "verdi": "NEI",
+            "innhold": "Nei"
+          },
+          "spoersmaal": "Ønsker du at vi legger inn et skattetrekk for barnepensjonen?"
         },
-        "spoersmaal": "Ønsker du at vi legger inn et skattetrekk for barnepensjonen?",
-        "opplysning": {
+        "trekk": {
           "svar": {
             "innhold": "20%"
           },
-          "spoersmaal": "Oppgi ønsket skattetrekk"
+          "spoersmaal": "Frivillig skattetrekk i prosent per måned"
+        },
+        "beskrivelse": {
+          "svar": {
+            "innhold": "Ikke i desember"
+          },
+          "spoersmaal": "Vi trenger beskjed hvis det ikke skal være trekk i desember eller andre deler av året (valgfritt)"
         }
       }
     }
