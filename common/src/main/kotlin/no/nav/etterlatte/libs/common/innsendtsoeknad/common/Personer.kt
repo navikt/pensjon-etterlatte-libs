@@ -145,6 +145,8 @@ data class Barn(
     val ukjentForelder: Opplysning<String>? = null,
     val verge: BetingetOpplysning<EnumSvar<JaNeiVetIkke>, Verge>?,
     val dagligOmsorg: Opplysning<EnumSvar<OmsorgspersonType>>?,
+    val ufoeretrygd: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
+    val arbeidsavklaringspenger: Opplysning<EnumSvar<JaNeiVetIkke>>? = null,
 ) : Person {
     override val type = PersonType.BARN
 
