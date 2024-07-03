@@ -11,18 +11,9 @@ dependencies {
     api(libs.jackson.datatypejdk8)
     api(libs.jackson.modulekotlin)
 
-    implementation(libs.ktor2.clientcore)
-    implementation(libs.ktor2.clientlogging)
-    implementation(libs.ktor2.clientauth)
-    implementation(libs.ktor2.jackson)
-    implementation(libs.ktor2.clientcontentnegotiation)
-
     testImplementation(libs.test.jupiter.api)
-    testImplementation(libs.test.jupiter.params)
-    testRuntimeOnly(libs.test.jupiter.engine)
     testImplementation(libs.test.kotest.assertionscore)
     testImplementation(libs.test.mockk)
-    testImplementation(libs.ktor2.clientmock)
 }
 
 publishing {
