@@ -1,8 +1,8 @@
 [plugins]
-cutterslade-analyze = { id = "ca.cutterslade.analyze", version = "1.9.2" }
+cutterslade-analyze = { id = "ca.cutterslade.analyze", version = "1.10.0" }
 
 [versions]
-jackson-version = "2.17.1"
+jackson-version = "2.17.2"
 jupiter-version = "5.10.3"
 
 [libraries]
@@ -12,4 +12,4 @@ jackson-modulekotlin = { module = "com.fasterxml.jackson.module:jackson-module-k
 
 test-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter-version" }
 test-kotest-assertionscore = { module = "io.kotest:kotest-assertions-core", version = "5.9.1" }
-test-mockk = { module = "io.mockk:mockk", version = "1.13.11" }
+test-mockk = { module = "io.mockk:mockk", version = "1.13.12" }
