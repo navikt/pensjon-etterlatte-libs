@@ -19,7 +19,7 @@ import java.time.LocalDateTime
     JsonSubTypes.Type(value = Barnepensjon::class, name = "BARNEPENSJON"),
     JsonSubTypes.Type(value = Omstillingsstoenad::class, name = "OMSTILLINGSSTOENAD"),
 )
-interface InnsendtSoeknad {
+interface InnsendtSoeknad : PDFMal {
     val versjon: String
     val spraak: Spraak
     val imageTag: ImageTag
