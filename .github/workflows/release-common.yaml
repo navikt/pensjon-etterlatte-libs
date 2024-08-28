@@ -4,8 +4,9 @@ on:
   workflow_dispatch: # Allow manually triggered workflow run
   push:
     paths:
-      - common
+      - common/**
       - gradle/libs.versions.toml
+      - "!**/test/**"
 
 jobs:
   build:
