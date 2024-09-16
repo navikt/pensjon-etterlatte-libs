@@ -1,5 +1,10 @@
 # pensjon-etterlatte-libs
 
+# Dette repoet er arkivert. Koden er flytta over til [pensjon-etterlatte-felles](https://github.com/navikt/pensjon-etterlatte-felles)
+
+
+---
+
 Felles biblioteker for Team Etterlatte.
 
 
